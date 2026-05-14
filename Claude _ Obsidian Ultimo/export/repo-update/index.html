@@ -1,0 +1,1848 @@
+<!DOCTYPE html><html lang="es"><head>
+
+
+
+
+<meta charset="utf-8">
+<title>Workshop · Claude + Obsidian · 14.05.2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=Manrope:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<script src="deck-stage.js"></script>
+<style>
+:root{
+  --navy:#2b3a4a;--navy-deep:#1d2935;--navy-soft:#3c4d5f;
+  --orange:#FF7033;--orange-soft:#ff8a55;
+  --blue:#0076DB;--blue-soft:#2891e8;
+  --cream:#F4F3EE;--cream-deep:#ebe8df;
+  --terra:#C15F3C;--ink:#1a232e;
+  --purple:#3a0d8c;--purple-deep:#1d0552;--purple-soft:#6a35c2;
+  --galo:#4A5A3C;
+  --mute-on-dark:#a4b2c0;--mute-on-cream:#6d5d52;
+  --rule-on-dark:rgba(255,255,255,0.18);--rule-on-cream:#d8d2c4;
+  --display:"DM Serif Display","Playfair Display",serif;
+  --serif:"Playfair Display","Times New Roman",serif;
+  --sans:"Manrope","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --pad-x:120px;--pad-top:80px;--pad-bottom:80px;
+}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+html,body{margin:0;padding:0;background:#0a0a0a;}
+body{font-family:var(--sans);}
+deck-stage section{overflow:hidden;position:relative;font-family:var(--sans);}
+
+/* ============ BACKGROUNDS ============ */
+.bg-navy{background:var(--navy);color:var(--cream);}
+.bg-navy::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 1200px 800px at 78% 28%,rgba(255,255,255,0.07),transparent 60%),
+  radial-gradient(ellipse 700px 500px at 18% 82%,rgba(255,112,51,0.10),transparent 70%);
+  pointer-events:none;z-index:0;}
+.bg-navy::after{display:none;}
+
+.bg-cream{background:var(--cream);color:var(--ink);}
+.bg-cream::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;
+  background:linear-gradient(180deg,var(--navy) 0%,var(--blue) 50%,var(--orange) 100%);
+  z-index:4;pointer-events:none;}
+.bg-cream::after{display:none;}
+
+.bg-purple{background:var(--purple-deep);color:var(--cream);}
+.bg-purple::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 1100px 700px at 72% 32%,rgba(106,53,194,0.55),transparent 65%),
+  radial-gradient(ellipse 600px 500px at 18% 78%,rgba(255,112,51,0.12),transparent 70%);
+  pointer-events:none;z-index:0;}
+.bg-purple::after{display:none;}
+
+.bg-duo{background:var(--orange);color:#fff;}
+.bg-duo::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(118deg,var(--orange) 0%,var(--orange) 48%,var(--blue) 52%,var(--blue) 100%);
+  z-index:0;}
+.bg-duo::after{display:none;}
+
+.bg-aic-glow{background:#0b1424;color:#fff;}
+.bg-aic-glow::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 1600px 1100px at 92% 58%,#ff7033 0%,rgba(255,112,51,0) 52%),
+  radial-gradient(ellipse 1100px 900px at 60% 50%,#0825A8 0%,rgba(8,37,168,0) 60%),
+  radial-gradient(circle 800px at 18% 22%,#1a2540 0%,#0b1424 70%);
+  z-index:0;pointer-events:none;}
+.bg-aic-glow::after{display:none;}
+
+
+/* decorative shapes */
+.blob{position:absolute;border-radius:50%;background:var(--terra);opacity:0.04;pointer-events:none;z-index:0;}
+.ring{position:absolute;border-radius:50%;border:1px solid var(--terra);opacity:0.12;pointer-events:none;z-index:0;}
+
+/* ============ FRAME ============ */
+.frame{position:absolute;inset:0;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);
+  display:flex;flex-direction:column;z-index:3;}
+
+/* ============ TOPBAR ============ */
+.topbar{display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:22px;letter-spacing:0.18em;text-transform:uppercase;}
+.topbar .mark{display:inline-flex;align-items:center;gap:12px;font-weight:700;}
+.topbar .mark .dot{width:12px;height:12px;border-radius:50%;background:var(--orange);}
+.topbar .meta{opacity:0.85;}
+.topbar.on-dark{color:var(--mute-on-dark);}
+.topbar.on-dark .mark{color:var(--cream);}
+.topbar.on-cream{color:var(--mute-on-cream);}
+.topbar.on-cream .mark{color:var(--ink);}
+.topbar.on-cream .mark .dot{background:var(--navy);}
+
+/* ============ FOOTER (logos) ============ */
+.footbar{margin-top:auto;display:flex;justify-content:space-between;align-items:center;
+  padding-top:28px;border-top:1px solid var(--rule-on-cream);gap:48px;}
+.footbar.on-dark{border-top:1px solid var(--rule-on-dark);}
+.footbar .host{display:flex;align-items:center;gap:18px;
+  font-family:var(--mono);font-size:14px;letter-spacing:0.18em;text-transform:uppercase;}
+.footbar .host img{height:38px;width:auto;display:block;}
+.footbar .host .xpl-chip{display:inline-flex;align-items:center;justify-content:center;
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(255,255,255,0.95);flex-shrink:0;
+  box-shadow:0 4px 14px rgba(0,0,0,0.18);}
+.footbar.on-cream .host .xpl-chip{background:radial-gradient(circle at 40% 35%, #5a1fa8 0%, #2d0d75 45%, #0a0420 100%);box-shadow:0 4px 14px rgba(0,0,0,0.28);}
+.footbar.on-cream .host .xpl-chip img{filter:brightness(0) invert(1);}
+.footbar .host .xpl-chip img{width:auto;height:34px;display:block;}
+.footbar .host .plus{font-family:var(--display);font-style:italic;font-size:26px;line-height:1;color:var(--orange);font-weight:400;opacity:0.9;}
+.footbar.on-dark .host .plus{color:var(--orange);}
+.footbar .host .lbl{color:var(--mute-on-cream);}
+.footbar.on-dark .host .lbl{color:var(--mute-on-dark);}
+.footbar .partners{display:flex;align-items:center;gap:22px;
+  font-family:var(--mono);font-size:13px;letter-spacing:0.22em;text-transform:uppercase;}
+.footbar .partners .lbl{color:var(--mute-on-cream);font-weight:700;margin-right:6px;}
+.footbar.on-dark .partners .lbl{color:var(--mute-on-dark);}
+.footbar .partners img{height:24px;width:auto;display:block;}
+.footbar .partners img.anth-icon{height:22px;}
+.footbar .partners img.anth{height:22px;}
+.footbar .partners img.galo{height:26px;}
+.footbar .partners img.xplora{height:28px;}
+.footbar.on-dark .partners img.anth-icon,
+.footbar.on-dark .partners img.galo{filter:brightness(0) invert(1);opacity:0.92;}
+.footbar.on-dark .partners img.xplora{filter:brightness(0) invert(1);opacity:0.92;}
+.footbar .partners .sep{width:1px;height:18px;background:currentColor;opacity:0.18;}
+
+/* ============ SLIDE 01 — HERO ============ */
+.bg-hero{background:#0a1322;color:var(--cream);overflow:hidden;}
+.bg-hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 1500px 1100px at 88% 52%,rgba(255,112,51,0.36) 0%,rgba(255,112,51,0) 56%),
+  radial-gradient(ellipse 900px 700px at 14% 26%,rgba(0,118,219,0.20) 0%,rgba(0,118,219,0) 62%),
+  radial-gradient(circle 900px at 55% 105%,rgba(58,13,140,0.24) 0%,rgba(58,13,140,0) 70%);
+  pointer-events:none;z-index:0;}
+.bg-hero::after{content:"";position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 38px,rgba(255,255,255,0.025) 38px 39px),
+    repeating-linear-gradient(90deg,transparent 0 38px,rgba(255,255,255,0.025) 38px 39px);
+  pointer-events:none;z-index:1;mix-blend-mode:overlay;}
+.hero-graph{position:absolute;top:-40px;right:-160px;width:1080px;height:1080px;
+  pointer-events:none;z-index:1;opacity:0.7;}
+.hero-graph .edge{stroke:rgba(255,135,80,0.42);stroke-width:1;fill:none;}
+.hero-graph .edge.bright{stroke:rgba(255,175,120,0.72);stroke-width:1.6;}
+.hero-graph .node{fill:#ff7033;}
+.hero-graph .node.bright{fill:#ffcfa8;}
+.hero-graph .node.dim{fill:rgba(255,255,255,0.55);}
+.hero-graph .node-halo{fill:rgba(255,112,51,0.18);}
+.hero-aurora{position:absolute;right:-200px;top:42%;width:780px;height:780px;
+  border-radius:50%;
+  background:radial-gradient(circle at center,rgba(255,112,51,0.55) 0%,rgba(255,112,51,0) 60%);
+  filter:blur(36px);pointer-events:none;z-index:0;}
+.hero-mono-stamp{position:absolute;left:var(--pad-x);bottom:calc(var(--pad-bottom) + 96px);
+  font-family:var(--mono);font-size:14px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(255,255,255,0.42);
+  display:flex;align-items:center;gap:14px;z-index:3;}
+.hero-mono-stamp::before{content:"";width:48px;height:1px;background:rgba(255,255,255,0.32);}
+.hero{display:grid;grid-template-rows:auto 1fr auto auto;gap:0;flex:1;position:relative;z-index:2;}
+.hero-brand{display:flex;align-items:center;gap:30px;
+  padding-bottom:24px;border-bottom:1px solid var(--rule-on-dark);}
+.hero-brand img.aic{height:72px;width:auto;display:block;}
+.hero-brand .x{font-family:var(--display);font-style:italic;font-size:46px;color:var(--orange);line-height:1;}
+.hero-brand .xpl-chip{display:inline-flex;align-items:center;justify-content:center;
+  width:72px;height:72px;border-radius:50%;
+  background:rgba(255,255,255,0.95);box-shadow:0 8px 28px rgba(0,0,0,0.24);}
+.hero-brand .xpl-chip img{width:auto;height:46px;display:block;}
+.hero-brand .copres{display:flex;flex-direction:column;gap:4px;
+  font-family:var(--mono);font-size:20px;text-transform:uppercase;letter-spacing:0.14em;color:var(--mute-on-dark);}
+.hero-brand .copres b{color:var(--cream);font-weight:700;}
+.hero-brand .badge{margin-left:auto;display:inline-flex;align-items:center;gap:14px;
+  padding:12px 22px;border-radius:999px;background:var(--orange);color:#fff;
+  font-family:var(--mono);font-size:20px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;}
+.hero-body{display:grid;grid-template-columns:0.85fr 1.5fr;gap:60px;align-items:end;padding:56px 0 32px;}
+.hero-date{display:flex;flex-direction:column;gap:14px;}
+.hero-date .eyebrow{font-family:var(--mono);font-size:18px;letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);}
+.hero-date .big{font-family:var(--display);font-size:210px;line-height:0.82;color:var(--cream);letter-spacing:-0.04em;}
+.hero-date .big em{color:var(--orange);font-style:italic;}
+.hero-date .sub{font-family:var(--mono);font-size:19px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute-on-dark);margin-top:8px;}
+.hero-headline{position:relative;}
+.hero-headline .kicker{font-family:var(--mono);font-size:21px;letter-spacing:0.22em;text-transform:uppercase;color:var(--orange);margin-bottom:18px;font-weight:700;}
+.hero-headline h1{margin:0;font-family:var(--display);font-weight:400;font-size:120px;line-height:0.88;letter-spacing:-0.028em;color:var(--cream);text-shadow:0 4px 38px rgba(0,0,0,0.3);}
+.hero-headline h1 .small{display:block;font-size:0.74em;color:rgba(244,243,238,0.92);}
+.hero-headline h1 .big-em{display:inline-block;color:var(--orange);font-style:italic;letter-spacing:-0.03em;}
+.hero-headline h1 em{color:var(--orange);font-style:italic;}
+.hero-headline .stack{margin-top:24px;display:inline-flex;align-items:center;gap:14px;
+  padding:10px 20px;border:1.5px solid var(--orange);border-radius:999px;
+  font-family:var(--mono);font-size:22px;color:var(--orange);font-weight:700;letter-spacing:0.14em;text-transform:uppercase;}
+.hero-headline .stack .star{color:var(--orange);}
+.hero-meta-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border-top:1px solid var(--rule-on-dark);padding-top:24px;}
+.hero-meta-row .cell{display:flex;flex-direction:column;gap:6px;padding-right:30px;border-right:1px solid var(--rule-on-dark);}
+.hero-meta-row .cell:last-child{border-right:none;}
+.hero-meta-row .lbl{font-family:var(--mono);font-size:18px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute-on-dark);font-weight:700;}
+.hero-meta-row .val{font-family:var(--display);font-size:38px;line-height:1;color:var(--cream);}
+.hero-meta-row .val em{color:var(--orange);font-style:italic;}
+
+/* ============ SLIDE 02 — AI Collective duotone ============ */
+.aic-wrap{flex:1;display:flex;flex-direction:column;}
+.aic-head{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;color:#fff;
+  font-family:var(--mono);font-size:22px;letter-spacing:0.18em;text-transform:uppercase;}
+.aic-head .mark{display:inline-flex;align-items:center;gap:12px;font-weight:700;}
+.aic-head .mark .dot{width:12px;height:12px;border-radius:50%;background:#fff;}
+.aic-hero{position:relative;display:grid;grid-template-columns:0.95fr 1.05fr;gap:60px;align-items:center;padding:30px 0;flex:1;}
+.aic-hero .left{position:relative;display:flex;flex-direction:column;gap:30px;justify-content:center;color:#fff;}
+.aic-hero .eyebrow{font-family:var(--mono);font-size:22px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;display:flex;align-items:center;gap:14px;}
+.aic-hero .eyebrow .sq{width:14px;height:14px;background:#fff;}
+.aic-hero h1{margin:0;font-family:var(--display);font-weight:400;font-size:104px;line-height:0.94;letter-spacing:-0.025em;color:#fff;}
+.aic-hero h1 em{font-style:italic;color:#ff7033;}
+.aic-hero .lede{margin:0;font-size:26px;line-height:1.45;color:rgba(255,255,255,0.95);max-width:720px;}
+.aic-hero .lede b{font-weight:800;}
+.aic-hero .right{position:relative;display:flex;align-items:center;justify-content:center;}
+.aic-mono{width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,0.96);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 30px 80px rgba(0,0,0,0.18);position:relative;z-index:1;}
+.aic-mono img{width:360px;height:auto;display:block;}
+.aic-mono::before{content:"";position:absolute;width:100%;height:100%;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.45);transform:scale(1.12);z-index:-1;}
+.aic-mono::after{content:"";position:absolute;width:100%;height:100%;border-radius:50%;
+  border:1px solid rgba(255,255,255,0.25);transform:scale(1.25);z-index:-1;}
+.aic-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid rgba(255,255,255,0.3);padding-top:24px;color:#fff;}
+.aic-pillars .col{display:flex;flex-direction:column;gap:10px;padding-right:34px;border-right:1px solid rgba(255,255,255,0.3);}
+.aic-pillars .col:last-child{border-right:none;}
+.aic-pillars .num{font-family:var(--mono);font-size:20px;letter-spacing:0.18em;font-weight:700;opacity:0.85;}
+.aic-pillars h4{margin:0;font-family:var(--display);font-size:36px;line-height:1.0;font-weight:400;}
+.aic-pillars p{margin:0;font-size:20px;line-height:1.4;color:rgba(255,255,255,0.88);}
+
+
+/* ============ SLIDE 03 — QR Comunidad ============ */
+.qr-cta{display:flex;flex-direction:column;gap:6px;margin-top:6px;
+  padding:18px 22px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.04);max-width:520px;}
+.qr-cta .qr-label{font-family:var(--mono);font-size:22px;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);font-weight:700;}
+.qr-cta .qr-meta{font-family:var(--mono);font-size:17px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.72);}
+.qr-frame{display:flex;flex-direction:column;align-items:center;gap:20px;}
+.qr-slot{width:460px;height:460px;background:transparent;
+  display:flex;align-items:center;justify-content:center;position:relative;}
+.qr-slot::before{display:none;}
+.qr-slot img{width:100%;height:100%;object-fit:contain;display:block;
+  filter:invert(1);mix-blend-mode:screen;}
+.qr-frame .qr-foot{font-family:var(--mono);font-size:20px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.9);}
+
+/* ============ SLIDE 04 — Xplora ============ */
+.xpl-wrap{flex:1;display:flex;flex-direction:column;min-height:0;gap:18px;}
+.xpl-hero{display:grid;grid-template-columns:1fr 0.85fr;gap:50px;align-items:center;padding:6px 0;flex:1;min-height:0;}
+.xpl-hero .left{display:flex;flex-direction:column;gap:18px;}
+.xpl-hero .eyebrow{font-family:var(--mono);font-size:22px;letter-spacing:0.22em;text-transform:uppercase;color:#fff;font-weight:700;display:flex;align-items:center;gap:14px;}
+.xpl-hero .eyebrow .sq{width:14px;height:14px;background:var(--orange);}
+.xpl-hero h1{margin:0;font-family:var(--display);font-weight:400;font-size:140px;line-height:0.92;letter-spacing:-0.025em;color:#fff;}
+.xpl-hero h1 em{font-style:italic;color:var(--orange);}
+.xpl-hero .tag{font-family:var(--mono);font-size:18px;letter-spacing:0.18em;text-transform:uppercase;color:#d5c5f0;font-weight:600;}
+.xpl-hero .lede{margin:0;font-size:19px;line-height:1.5;color:rgba(255,255,255,0.95);max-width:580px;}
+.xpl-hero .lede b{color:var(--orange);font-weight:800;}
+.xpl-hero .right{position:relative;display:flex;align-items:center;justify-content:center;}
+.xpl-visual-stack{position:relative;display:flex;flex-direction:column;align-items:center;gap:35px;width:300px;}
+.xpl-hero .right{overflow:visible;}
+.xpl-visual-stack::before{display:none;}
+.xpl-compass{position:relative;flex-shrink:0;width:260px;height:260px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.95);border-radius:50%;box-shadow:0 20px 60px rgba(0,0,0,0.28);}
+.xpl-compass img{width:182px;height:auto;display:block;position:relative;z-index:2;mix-blend-mode:multiply;}
+.xpl-compass::before{display:none;}
+.xpl-compass::after{content:"";position:absolute;width:100%;height:100%;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.45);transform:scale(1.12);z-index:-1;}
+.xpl-qr-slot{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:7px;}
+.xpl-qr-slot img{width:265px;height:265px;object-fit:contain;display:block;
+  background:#fff;padding:8px;border-radius:4px;
+  border:1px solid rgba(224,90,40,0.45);
+  box-shadow:0 4px 24px rgba(0,0,0,0.35);}
+.xpl-qr-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--orange);}
+.xpl-three{display:grid;grid-template-columns:repeat(3,1fr);gap:0;flex-shrink:0;border-top:1px solid var(--rule-on-dark);padding-top:16px;color:#fff;}
+.xpl-three .col{padding-right:36px;border-right:1px solid var(--rule-on-dark);display:flex;flex-direction:column;gap:8px;}
+.xpl-three .col:last-child{border-right:none;}
+.xpl-three .k{font-family:var(--mono);font-size:15px;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);font-weight:700;}
+.xpl-three .v{font-family:var(--display);font-size:20px;line-height:1.25;color:#fff;}
+
+/* ============ SLIDE Xplora Legacy — past speakers ============ */
+.xpl-legacy{flex:1;display:flex;flex-direction:column;gap:24px;min-height:0;}
+.xpl-legacy .lg-head{display:flex;align-items:flex-end;justify-content:space-between;gap:60px;margin-top:8px;}
+.xpl-legacy .lg-head h2{margin:0;font-family:var(--display);font-weight:400;font-size:78px;line-height:0.96;letter-spacing:-0.02em;color:#fff;max-width:1100px;}
+.xpl-legacy .lg-head h2 em{font-style:italic;color:var(--orange);}
+.xpl-legacy .lg-head .kicker{max-width:480px;font-size:20px;line-height:1.5;color:rgba(255,255,255,0.92);margin:0;}
+.xpl-legacy .lg-head .kicker b{color:var(--orange);font-weight:800;}
+
+.xpl-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid rgba(255,255,255,0.22);border-bottom:1px solid rgba(255,255,255,0.22);
+  padding:20px 0;color:#fff;}
+.xpl-stats .col{padding-right:36px;border-right:1px solid rgba(255,255,255,0.22);display:flex;flex-direction:column;gap:4px;}
+.xpl-stats .col:last-child{border-right:none;}
+.xpl-stats .n{font-family:var(--display);font-size:78px;line-height:0.9;color:var(--orange);letter-spacing:-0.02em;}
+.xpl-stats .l{font-family:var(--mono);font-size:16px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.78);font-weight:600;}
+
+.xpl-speakers{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;min-height:0;}
+.xpl-speakers .sp{position:relative;display:flex;flex-direction:column;
+  border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.04);
+  padding:24px 24px 22px;overflow:hidden;}
+.xpl-speakers .sp.feature{background:linear-gradient(165deg,rgba(255,112,51,0.22) 0%,rgba(255,255,255,0.04) 80%);border-color:rgba(255,112,51,0.45);}
+.xpl-speakers .sp .yr{font-family:var(--mono);font-size:14px;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);font-weight:700;}
+.xpl-speakers .sp .name{margin:18px 0 0;font-family:var(--display);font-weight:400;font-size:46px;line-height:0.95;color:#fff;letter-spacing:-0.015em;}
+.xpl-speakers .sp .name em{font-style:italic;color:var(--orange);}
+.xpl-speakers .sp .role{margin-top:auto;padding-top:22px;border-top:1px solid rgba(255,255,255,0.18);
+  font-size:16px;line-height:1.4;color:rgba(255,255,255,0.85);}
+.xpl-speakers .sp .role b{color:#fff;font-weight:700;}
+.xpl-speakers .sp .plus{display:flex;align-items:center;justify-content:center;flex:1;
+  font-family:var(--display);font-style:italic;font-size:140px;color:var(--orange);opacity:0.55;line-height:1;}
+.xpl-speakers .sp.more{background:transparent;border-style:dashed;border-color:rgba(255,255,255,0.28);}
+.xpl-speakers .sp.more .yr{color:rgba(255,255,255,0.6);}
+.xpl-speakers .sp.more .role{color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.18);}
+
+/* ============ SLIDE 04 — Anfitriones y Aliados ============ */
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:60px;margin:10px 0 12px;}
+.section-head h2{margin:0;font-family:var(--display);font-weight:400;font-size:60px;line-height:0.98;letter-spacing:-0.02em;color:var(--ink);max-width:1100px;}
+.section-head h2 em{color:var(--terra);font-style:italic;}
+.section-head .kicker{max-width:540px;font-size:20px;line-height:1.5;color:#3b322c;margin:0;}
+.section-head .kicker b{color:var(--terra);font-weight:700;}
+
+.sponsors-tier{margin-top:8px;}
+.tier-label{display:flex;align-items:center;gap:18px;margin-bottom:10px;}
+.tier-label .badge{font-family:var(--mono);font-size:18px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--cream);background:var(--navy);padding:8px 18px;font-weight:700;}
+.tier-label .rule{flex:1;height:1px;background:var(--rule-on-cream);}
+.tier-label .meta{font-family:var(--mono);font-size:18px;color:var(--mute-on-cream);text-transform:uppercase;letter-spacing:0.12em;}
+.logo-card{height:176px;border:1px solid var(--rule-on-cream);background:#fff;display:flex;align-items:center;justify-content:center;position:relative;padding:24px;overflow:hidden;}
+.logo-card.tall{height:196px;}
+.logo-card .lbl{position:absolute;bottom:12px;left:16px;font-family:var(--mono);font-size:14px;
+  color:var(--mute-on-cream);letter-spacing:0.14em;text-transform:uppercase;}
+.logo-card img{max-width:100%;display:block;}
+.logo-card img.aic{height:148px;width:auto;}
+.logo-card img.xplora{max-height:158px;max-width:86%;width:auto;height:auto;}
+.logo-card img.anth{max-height:44px;max-width:80%;width:auto;height:auto;}
+.logo-card img.galo{max-height:108px;max-width:78%;width:auto;height:auto;}
+.logo-card img.wemil{height:48px;width:auto;filter:brightness(0);}
+.logo-card.aic-brand{
+  background:
+    radial-gradient(ellipse 420px 220px at 88% 52%, rgba(255,112,51,0.55) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 300px at 14% 50%, rgba(8,37,168,0.65) 0%, transparent 65%),
+    #0b1424;
+  border-color:rgba(255,255,255,0.10);}
+.logo-card.aic-brand .aic-logo-lg{height:108px;width:auto;display:block;mix-blend-mode:normal;filter:brightness(0) invert(1);}
+.logo-card.aic-brand .lbl{color:rgba(255,255,255,0.5);}
+.logo-card.xplora-brand{
+  background:radial-gradient(circle at 38% 42%, #5a1fa8 0%, #2d0d75 48%, #0a0420 100%);
+  border-color:rgba(255,255,255,0.10);gap:26px;}
+.logo-card.xplora-brand .xpl-chip-lg{display:inline-flex;align-items:center;justify-content:center;
+  width:88px;height:88px;border-radius:50%;background:rgba(255,255,255,0.95);
+  box-shadow:0 8px 32px rgba(0,0,0,0.35);flex-shrink:0;}
+.logo-card.xplora-brand .xpl-chip-lg img{width:62px;height:auto;display:block;mix-blend-mode:normal;}
+.logo-card.xplora-brand .xpl-wordmark{font-family:var(--sans);font-weight:800;font-size:62px;
+  letter-spacing:-0.025em;color:#fff;line-height:1;text-shadow:0 0 48px rgba(200,160,255,0.35);}
+.logo-card.xplora-brand .lbl{color:rgba(255,255,255,0.5);}
+.tier-row-2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+.tier-row-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+
+/* ============ Speaker session divider ============ */
+.session-divider{flex:1;display:grid;grid-template-columns:1.05fr 1fr;gap:80px;align-items:center;padding:24px 0;}
+.session-divider .left{display:flex;flex-direction:column;gap:26px;}
+.session-divider .num-block{font-family:var(--mono);font-size:20px;color:var(--terra);letter-spacing:0.16em;text-transform:uppercase;
+  display:flex;align-items:center;gap:18px;}
+.session-divider .num-block .big{font-family:var(--display);font-size:72px;color:var(--navy);letter-spacing:-0.02em;line-height:1;}
+.session-divider .num-block .lbl{color:var(--ink);font-weight:700;}
+.session-divider h1{margin:0;font-family:var(--display);font-weight:400;font-size:104px;line-height:0.94;color:var(--ink);letter-spacing:-0.02em;}
+.session-divider h1 em{color:var(--terra);font-style:italic;}
+.session-divider .speaker-card{display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--rule-on-cream);padding-top:22px;}
+.session-divider .sp-role{font-family:var(--mono);font-size:18px;color:var(--terra);letter-spacing:0.14em;text-transform:uppercase;font-weight:700;display:flex;align-items:center;gap:14px;}
+.session-divider .sp-role img{height:24px;width:auto;}
+.session-divider .sp-name{margin:0;font-family:var(--display);font-size:64px;line-height:0.94;color:var(--ink);}
+.session-divider .sp-name em{color:var(--terra);font-style:italic;}
+.session-divider .sp-bio{margin:0;font-size:20px;line-height:1.45;color:#3b322c;}
+.session-divider .sp-bio b{color:var(--ink);font-weight:700;}
+.session-divider .right-portrait{height:100%;min-height:520px;
+  background:radial-gradient(circle at 32% 32%,var(--terra) 0,transparent 55%),
+    radial-gradient(circle at 70% 70%,var(--orange) 0,transparent 55%),var(--navy);
+  border:1px solid var(--rule-on-cream);position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;padding:32px;}
+.session-divider .right-portrait .ptrt-label{font-family:var(--mono);font-size:18px;color:var(--cream);letter-spacing:0.14em;text-transform:uppercase;opacity:0.85;}
+.session-divider .right-portrait .partner-stamp{position:absolute;top:32px;right:32px;display:flex;align-items:center;gap:12px;color:var(--cream);}
+.session-divider .right-portrait .partner-stamp img{height:34px;width:auto;filter:brightness(0) invert(1);opacity:0.95;}
+.session-divider .right-portrait .partner-stamp.galo img{filter:brightness(0) invert(1);}
+
+/* ============ Content placeholder ============ */
+.content-placeholder{flex:1;display:flex;flex-direction:column;gap:28px;padding-top:24px;}
+.content-placeholder .ph-eyebrow{display:flex;align-items:center;gap:14px;
+  font-family:var(--mono);font-size:18px;color:var(--navy);letter-spacing:0.16em;text-transform:uppercase;font-weight:700;}
+.content-placeholder .ph-eyebrow .sq{width:14px;height:14px;background:var(--navy);}
+.content-placeholder .ph-eyebrow .meta{color:var(--mute-on-cream);font-weight:500;}
+.content-placeholder h2{margin:0;font-family:var(--display);font-weight:400;font-size:84px;line-height:0.96;color:var(--ink);letter-spacing:-0.01em;max-width:1480px;}
+.content-placeholder h2 em{color:var(--terra);font-style:italic;}
+.content-placeholder .slot{flex:1;display:grid;grid-template-columns:1.45fr 1fr;grid-template-rows:1fr 1fr;gap:16px;}
+.content-placeholder .slot .block{border:1.25px dashed var(--terra);background:rgba(193,95,60,0.04);
+  padding:26px 30px;display:flex;flex-direction:column;gap:12px;overflow:hidden;}
+.content-placeholder .slot .block.lead{grid-row:1 / span 2;gap:16px;background:rgba(193,95,60,0.06);padding:30px 34px;}
+.content-placeholder .slot .block.lead h4{margin-top:auto;}
+.content-placeholder .slot .block .tag{display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:16px;letter-spacing:0.2em;text-transform:uppercase;color:var(--terra);font-weight:700;}
+.content-placeholder .slot .block .tag::before{content:"";width:10px;height:10px;background:var(--terra);}
+.content-placeholder .slot .block h4{margin:0;font-family:var(--display);font-weight:400;font-size:38px;line-height:0.98;color:var(--ink);letter-spacing:-0.01em;}
+.content-placeholder .slot .block.lead h4{font-size:60px;}
+.content-placeholder .slot .block h4 em{color:var(--terra);font-style:italic;}
+.content-placeholder .slot .block p{margin:0;font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.35;color:var(--mute-on-cream);}
+.content-placeholder .slot .block.lead p{font-size:26px;max-width:520px;}
+.content-placeholder .slot .slot-mark{font-family:var(--mono);font-size:22px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.85;}
+.content-placeholder .slot .slot-hint{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--mute-on-cream);max-width:720px;text-align:center;line-height:1.3;}
+
+/* ============ Bases ============ */
+.bases-grid{flex:1;display:grid;grid-template-columns:1fr 1.05fr;gap:80px;padding-top:32px;}
+.bases-grid h2{margin:0 0 24px;font-family:var(--display);font-weight:400;font-size:80px;line-height:0.96;color:var(--ink);letter-spacing:-0.01em;}
+.bases-grid h2 em{color:var(--terra);font-style:italic;}
+.bases-grid .lede{margin:0;font-size:22px;line-height:1.5;color:#3b322c;max-width:540px;}
+.bases-grid .lede b{color:var(--ink);font-weight:700;}
+.bases-list{display:flex;flex-direction:column;}
+.bases-list .row{display:grid;grid-template-columns:74px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--rule-on-cream);align-items:baseline;}
+.bases-list .row:last-child{border-bottom:1px solid var(--rule-on-cream);}
+.bases-list .n{font-family:var(--mono);font-size:24px;color:var(--navy);font-weight:700;letter-spacing:0.1em;}
+.bases-list h4{margin:0 0 6px;font-family:var(--display);font-weight:400;font-size:30px;color:var(--ink);}
+.bases-list p{margin:0;font-size:19px;line-height:1.5;color:#3b322c;}
+.bases-list p b{color:var(--ink);font-weight:700;}
+.pill{display:inline-flex;align-items:center;gap:12px;padding:10px 18px;border-radius:999px;
+  font-family:var(--mono);font-size:18px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;}
+.pill .sq{width:12px;height:12px;}
+
+/* small inline brand stamp for divider */
+.galo-brand-card{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;text-align:center;padding:40px 0;}
+.galo-brand-card .galo-question{font-family:var(--display);font-style:italic;font-size:72px;color:var(--terra);line-height:1;letter-spacing:-0.015em;margin-bottom:4px;}
+.galo-brand-card .galo-mark{height:320px;width:auto;display:block;}
+.galo-brand-card h1{margin:0;font-family:var(--display);font-weight:400;font-size:160px;color:var(--ink);letter-spacing:-0.04em;line-height:1;}
+.galo-brand-card h1 em{color:var(--terra);font-style:italic;}
+.galo-presenter{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:24px;padding-top:24px;border-top:1px solid var(--rule-on-cream);min-width:360px;}
+.galo-presenter .presenter-tag{font-family:var(--mono);font-size:14px;letter-spacing:0.22em;text-transform:uppercase;color:var(--mute-on-cream);font-weight:700;}
+.galo-presenter .presenter-name{font-family:var(--display);font-size:52px;line-height:1;color:var(--ink);letter-spacing:-0.01em;}
+.galo-presenter .presenter-name em{color:var(--terra);font-style:italic;}
+.galo-presenter .presenter-role{font-family:var(--mono);font-size:14px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute-on-cream);}
+
+/* ============ SLIDE 20 — Challenge criteria ============ */
+.challenge-wrap{flex:1;display:flex;flex-direction:column;gap:48px;padding-top:24px;}
+.challenge-head{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:end;padding-bottom:32px;border-bottom:1px solid var(--rule-on-cream);}
+.challenge-head .head-left{display:flex;flex-direction:column;gap:24px;}
+.challenge-head h2{margin:0;font-family:var(--display);font-weight:400;font-size:104px;line-height:0.96;color:var(--ink);letter-spacing:-0.015em;}
+.challenge-head h2 em{color:var(--terra);font-style:italic;}
+.challenge-head .lede{margin:0;font-size:21px;line-height:1.5;color:#3b322c;}
+.challenge-head .lede b{color:var(--ink);font-weight:700;}
+.challenge-criteria{display:grid;grid-template-columns:repeat(3,1fr);gap:0;flex:1;}
+.challenge-criteria .col{display:flex;flex-direction:column;gap:18px;padding:8px 36px 8px 0;border-right:1px solid var(--rule-on-cream);}
+.challenge-criteria .col + .col{padding-left:36px;}
+.challenge-criteria .col:last-child{border-right:none;padding-right:0;}
+.challenge-criteria .num{font-family:var(--mono);font-size:14px;letter-spacing:0.24em;color:var(--terra);font-weight:700;}
+.challenge-criteria h4{margin:0;font-family:var(--display);font-weight:400;font-size:56px;line-height:1;color:var(--ink);letter-spacing:-0.01em;}
+.challenge-criteria h4 em{color:var(--terra);font-style:italic;}
+.challenge-criteria .q{margin:0;font-family:var(--mono);font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);font-weight:700;}
+.challenge-criteria p.desc{margin:0;font-size:18px;line-height:1.5;color:#3b322c;}
+.challenge-criteria p.desc b{color:var(--ink);font-weight:700;}
+.brand-stamp{display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:18px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mute-on-cream);}
+.brand-stamp img{height:24px;width:auto;}
+.brand-stamp img.anth-icon{height:22px;}
+
+/* ============ We Make It Lab ============ */
+.wemil-chip{display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:16px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--mute-on-cream);}
+.wemil-chip img{width:auto;height:22px;display:block;}
+.footbar.on-cream .partners .wemil-chip img,
+.session-divider .wemil-chip img{filter:brightness(0);}
+.footbar .partners .wemil-chip{font-size:0;letter-spacing:0;gap:0;}
+.footbar .partners .wemil-chip img{height:22px;}
+.footbar.on-dark .partners .wemil-chip{color:var(--mute-on-dark);}
+.wemil-card-ph{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;}
+.wemil-card-ph .logo-bg{width:120px;height:54px;background:var(--navy);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;padding:0 14px;}
+.wemil-card-ph .logo-bg img{width:auto;height:38px;display:block;}
+.wemil-card-ph .name{font-family:var(--sans);font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;}
+
+/* ============ Logos: quitar fondo blanco en contextos claros ============ */
+.footbar.on-cream .partners img{mix-blend-mode:multiply;}
+.session-divider .sp-role img{mix-blend-mode:multiply;}
+.brand-stamp img{mix-blend-mode:multiply;}
+.logo-card img{mix-blend-mode:multiply;}
+/* Logos invertidos a blanco en slides oscuras (galo/anth en dark footbar) */
+.footbar.on-dark .partners img.galo,
+.footbar.on-dark .partners img.anth-icon,
+.footbar.on-dark .partners img.anth,
+.footbar.on-dark .partners img.personal-logo{filter:brightness(0) invert(1);opacity:0.92;}
+
+/* ============ JIMMY — Editorial Cards ============ */
+.jim-page{flex:1;display:grid;grid-template-columns:0.78fr 1.22fr;gap:54px;align-items:start;padding-top:14px;}
+.jim-left{display:flex;flex-direction:column;gap:22px;position:relative;}
+.jim-num{font-family:var(--display);font-style:italic;font-size:280px;line-height:0.78;color:var(--terra);letter-spacing:-0.05em;margin:-26px 0 -22px;display:flex;align-items:flex-start;gap:10px;}
+.jim-num .of{font-family:var(--mono);font-style:normal;font-size:26px;color:var(--mute-on-cream);letter-spacing:0.18em;padding-top:36px;font-weight:600;}
+.jim-eyebrow{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:18px;color:var(--navy);letter-spacing:0.18em;text-transform:uppercase;font-weight:700;}
+.jim-eyebrow .sq{width:12px;height:12px;background:var(--terra);}
+.jim-eyebrow .meta{color:var(--mute-on-cream);font-weight:500;}
+.jim-h{margin:0;font-family:var(--display);font-weight:400;font-size:84px;line-height:0.95;color:var(--ink);letter-spacing:-0.02em;}
+.jim-h em{color:var(--terra);font-style:italic;}
+.jim-kicker{font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.4;color:var(--mute-on-cream);max-width:440px;margin:6px 0 0;}
+.jim-kicker b{color:var(--navy);font-style:normal;font-weight:600;}
+.jim-right{display:flex;flex-direction:column;gap:18px;padding-top:6px;}
+.jim-lead{padding:34px 38px;background:var(--navy);color:var(--cream);position:relative;}
+.jim-lead::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,var(--orange) 0%,var(--terra) 100%);}
+.jim-lead .tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:14px;letter-spacing:0.24em;text-transform:uppercase;color:var(--orange);font-weight:700;}
+.jim-lead .tag::before{content:"";width:8px;height:8px;background:var(--orange);}
+.jim-lead h4{margin:14px 0 0;font-family:var(--display);font-weight:400;font-size:46px;line-height:1.0;color:var(--cream);letter-spacing:-0.01em;}
+.jim-lead h4 em{color:var(--orange);font-style:italic;}
+.jim-lead .body{margin:16px 0 0;font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.4;color:rgba(244,243,238,0.78);}
+.jim-lead .body b{font-style:normal;color:#fff;font-weight:600;}
+.jim-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.jim-card{padding:22px 26px;background:rgba(193,95,60,0.05);border-top:3px solid var(--terra);display:flex;flex-direction:column;gap:10px;}
+.jim-card.alt{background:rgba(43,58,74,0.06);border-top-color:var(--navy);}
+.jim-card .tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:0.22em;text-transform:uppercase;color:var(--terra);font-weight:700;}
+.jim-card.alt .tag{color:var(--navy);}
+.jim-card .tag::before{content:"";width:8px;height:8px;background:var(--terra);}
+.jim-card.alt .tag::before{background:var(--navy);}
+.jim-card p{margin:0;font-family:var(--sans);font-size:21px;line-height:1.42;color:var(--ink);}
+.jim-card p b{font-weight:700;color:var(--terra);}
+.jim-card.alt p b{color:var(--navy);}
+
+/* ============ LUCIANO — 7 Niveles de Memoria ============ */
+.luc-split{flex:1;display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center;}
+.luc-left{display:flex;flex-direction:column;gap:22px;}
+.luc-badge{display:flex;align-items:baseline;gap:14px;}
+.luc-badge .n{font-family:var(--display);font-style:italic;font-size:148px;line-height:1;color:var(--orange);letter-spacing:-0.04em;}
+.luc-badge .of7{font-family:var(--mono);font-size:19px;color:var(--mute-on-cream);letter-spacing:0.14em;text-transform:uppercase;padding-bottom:16px;}
+.luc-left h2{margin:0;font-family:var(--display);font-weight:400;font-size:82px;line-height:0.95;color:var(--ink);letter-spacing:-0.02em;}
+.luc-left h2 em{color:var(--terra);font-style:italic;}
+.luc-concept{display:flex;gap:0;padding:22px 28px;background:rgba(43,58,74,0.05);border-left:3px solid var(--navy);}
+.luc-concept p{margin:0;font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.45;color:var(--ink);}
+.luc-concept p b{font-style:normal;color:var(--navy);}
+.luc-reto{display:flex;gap:0;padding:18px 28px;background:rgba(193,95,60,0.06);border-left:3px solid var(--terra);}
+.luc-reto .tag{font-family:var(--mono);font-size:15px;letter-spacing:0.2em;text-transform:uppercase;color:var(--terra);font-weight:700;white-space:nowrap;margin-right:14px;padding-top:4px;}
+.luc-reto p{margin:0;font-family:var(--sans);font-size:23px;line-height:1.4;color:var(--mute-on-cream);}
+.luc-reto p b{color:var(--ink);font-weight:600;}
+.luc-visual{display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.luc-visual svg{max-height:600px;width:auto;max-width:100%;}
+.luc-exp{flex:1;display:grid;grid-template-columns:1fr 1.15fr;gap:80px;align-items:center;}
+.luc-exp-text{display:flex;flex-direction:column;gap:20px;}
+.luc-exp-text .eyebrow{font-family:var(--mono);font-size:22px;letter-spacing:0.22em;text-transform:uppercase;color:var(--orange);font-weight:700;}
+.luc-exp-text h1{margin:0;font-family:var(--display);font-weight:400;font-size:160px;line-height:0.88;color:var(--cream);letter-spacing:-0.04em;}
+.luc-exp-text h1 em{color:var(--orange);font-style:italic;}
+.luc-handson{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;text-align:center;}
+.luc-handson-ew{font-family:var(--mono);font-size:20px;letter-spacing:0.28em;text-transform:uppercase;color:var(--orange);font-weight:700;}
+.luc-handson-h1{margin:0;font-family:var(--display);font-weight:400;font-size:148px;line-height:0.88;color:var(--cream);letter-spacing:-0.04em;}
+.luc-handson-h1 em{color:var(--orange);font-style:italic;}
+.luc-close{flex:1;display:flex;flex-direction:column;justify-content:center;gap:32px;max-width:1200px;}
+.luc-close h2{margin:0;font-family:var(--display);font-weight:400;font-size:96px;line-height:0.94;color:var(--cream);letter-spacing:-0.03em;}
+.footbar .partners img.personal-logo{height:30px;width:auto;display:block;}
+.luc-close h2 em{color:var(--orange);font-style:italic;}
+.luc-close .quote{font-family:var(--serif);font-style:italic;font-size:30px;line-height:1.5;color:var(--mute-on-dark);max-width:900px;}
+.luc-close .quote b{color:var(--cream);font-style:normal;}
+</style>
+</head>
+<body style="">
+
+<deck-stage width="1920" height="1080" style="--deck-rail-w: 188px;">
+
+  <!-- ============ SLIDE 01 — HERO ============ -->
+  <section class="bg-hero">
+    <div class="hero-aurora"></div>
+    <svg class="hero-graph" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <radialGradient id="haloG" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff7033" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#ff7033" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <g class="edges">
+        <path class="edge bright" d="M 460 200 C 540 240, 580 320, 540 380"/>
+        <path class="edge bright" d="M 540 380 C 600 420, 720 380, 780 460"/>
+        <path class="edge" d="M 540 380 C 460 460, 380 480, 320 540"/>
+        <path class="edge" d="M 320 540 C 260 600, 280 720, 380 760"/>
+        <path class="edge bright" d="M 540 380 C 620 480, 680 580, 660 680"/>
+        <path class="edge" d="M 660 680 C 720 740, 820 740, 880 660"/>
+        <path class="edge" d="M 460 200 C 360 200, 260 240, 220 320"/>
+        <path class="edge" d="M 220 320 C 160 380, 140 460, 200 520"/>
+        <path class="edge" d="M 200 520 C 240 620, 320 660, 380 760"/>
+        <path class="edge" d="M 780 460 C 820 540, 860 580, 880 660"/>
+        <path class="edge" d="M 460 200 C 520 140, 660 160, 720 240"/>
+        <path class="edge" d="M 720 240 C 800 280, 820 360, 780 460"/>
+        <path class="edge" d="M 540 380 C 480 360, 420 360, 380 400"/>
+        <path class="edge" d="M 380 400 C 320 440, 320 500, 320 540"/>
+        <path class="edge" d="M 660 680 C 580 700, 480 720, 380 760"/>
+        <path class="edge" d="M 380 760 C 360 820, 380 880, 460 900"/>
+        <path class="edge" d="M 460 900 C 540 920, 620 880, 660 820"/>
+        <path class="edge" d="M 660 820 C 720 780, 720 720, 660 680"/>
+      </g>
+      <g class="nodes">
+        <circle class="node-halo" cx="540" cy="380" r="32"/>
+        <circle class="node-halo" cx="780" cy="460" r="24"/>
+        <circle class="node-halo" cx="660" cy="680" r="22"/>
+        <circle class="node bright" cx="540" cy="380" r="9"/>
+        <circle class="node bright" cx="780" cy="460" r="7"/>
+        <circle class="node bright" cx="660" cy="680" r="7"/>
+        <circle class="node" cx="460" cy="200" r="5"/>
+        <circle class="node" cx="320" cy="540" r="5"/>
+        <circle class="node" cx="380" cy="760" r="5"/>
+        <circle class="node" cx="880" cy="660" r="5"/>
+        <circle class="node" cx="220" cy="320" r="4"/>
+        <circle class="node" cx="200" cy="520" r="4"/>
+        <circle class="node" cx="720" cy="240" r="4"/>
+        <circle class="node" cx="380" cy="400" r="4"/>
+        <circle class="node dim" cx="460" cy="900" r="3"/>
+        <circle class="node dim" cx="660" cy="820" r="3"/>
+        <circle class="node dim" cx="820" cy="740" r="3"/>
+        <circle class="node dim" cx="160" cy="380" r="3"/>
+      </g>
+    </svg>
+    <div class="frame">
+      <div class="hero">
+        <div class="hero-brand">
+          <img class="aic" src="assets/logo-aicollective-white.png" alt="The AI Collective">
+          <span class="x">×</span>
+          <span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora"></span>
+          <div class="copres">
+            <span><b>Co-hosts</b> del workshop</span>
+            <span>The AI Collective Buenos Aires × Xplora · UCEMA</span>
+          </div>
+          <span class="badge">Edición 01</span>
+        </div>
+
+        <div class="hero-body">
+          <div class="hero-date">
+            <span class="eyebrow">14 · Mayo · 2026</span>
+            <span class="big">14<em>.</em><br>05</span>
+            <span class="sub">17 — 19h · UCEMA, Av. Córdoba 374</span>
+          </div>
+          <div class="hero-headline">
+            <span class="kicker">Workshop · Claude + Obsidian</span>
+            <h1>Construí tu<br><em>second brain</em><br>con IA.</h1>
+            <span class="stack"><span class="star">✻</span> Claude × Obsidian · live demo</span>
+          </div>
+        </div>
+
+        <div class="hero-meta-row">
+          <div class="cell">
+            <span class="lbl">Fecha</span>
+            <span class="val"><em>Jueves</em> 14.05</span>
+          </div>
+          <div class="cell">
+            <span class="lbl">Horario</span>
+            <span class="val">17 — 19h</span>
+          </div>
+          <div class="cell">
+            <span class="lbl">Sede</span>
+            <span class="val">UCEMA · Aula Magna</span>
+          </div>
+          <div class="cell">
+            <span class="lbl">Stack</span>
+            <span class="val"><em>Claude</em> + Obsidian</span>
+          </div>
+        </div>
+
+        <div class="footbar on-dark">
+          <div class="host">
+            <img src="assets/logo-aicollective-white.png" alt="The AI Collective">
+            <span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span>
+          </div>
+          <div class="partners">
+            <span class="lbl">Aliados</span>
+            <img class="anth-icon" src="assets/icon-anthropic.png" alt="Anthropic">
+            <span class="sep"></span>
+            <img class="galo" src="assets/logo-galo.png" alt="Galo">
+            <span class="sep"></span>
+            <span class="wemil-chip"><img src="assets/logo-wemil.png" alt="We Make It Lab"> We Make It Lab</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 02 — AI Collective (glow) ============ -->
+  <section class="bg-aic-glow">
+    <div class="frame">
+      <div class="aic-wrap">
+        <div class="aic-head">
+          <span class="mark"><span class="dot"></span>&nbsp;The AI Collective · Buenos Aires</span>
+          <span>02 / 28 · Comunidad</span>
+        </div>
+
+        <div class="aic-hero">
+          <div class="left">
+            <span class="eyebrow"><span class="sq"></span>World's Largest AI Community</span>
+            <h1>La <em>comunidad</em><br>de IA <em>más grande</em><br>del mundo.</h1>
+            <p class="lede">Un <b>non-profit global</b> que construye la <b>capa humana de la era IA</b>. Une <b>+250.000 líderes, builders y stakeholders</b> en <b>+150 chapters</b> de <b>+40 países</b> — para democratizar la frontera, construir confianza y coordinar cómo navegamos esta aceleración.</p>
+          </div>
+          <div class="right">
+            <div class="aic-mono">
+              <img src="assets/logo-aicollective-full.png" alt="The AI Collective">
+            </div>
+          </div>
+        </div>
+
+        <div class="aic-pillars">
+          <div class="col">
+            <span class="num">01 · Comunidad</span>
+            <h4>+250.000 miembros</h4>
+            <p>Líderes, builders y stakeholders de IA en chapters locales — desde San Francisco a Buenos Aires.</p>
+          </div>
+          <div class="col">
+            <span class="num">02 · Alcance</span>
+            <h4>+150 chapters · +40 países</h4>
+            <p>Una red global con voz local. Cada chapter convoca, cura y arma los encuentros de su ciudad.</p>
+          </div>
+          <div class="col">
+            <span class="num">03 · Formato</span>
+            <h4>Demo nights · Salons · Dinners</h4>
+            <p>Conversaciones entre practicantes que <b>entrenaron modelos, shippearon productos</b> y mueven la aguja del ecosistema.</p>
+          </div>
+        </div>
+        <div class="footbar on-dark">
+          <div class="host">
+            <img src="assets/logo-aicollective-white.png" alt="The AI Collective">
+            <span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span>
+          </div>
+          <div class="partners">
+            <span class="lbl">Aliados</span>
+            <img class="anth-icon" src="assets/icon-anthropic.png" alt="Anthropic">
+            <span class="sep"></span>
+            <img class="galo" src="assets/logo-galo.png" alt="Galo">
+            <span class="sep"></span>
+            <span class="wemil-chip"><img src="assets/logo-wemil.png" alt="We Make It Lab"> We Make It Lab</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 03 — Sumate · QR Comunidad ============ -->
+  <section class="bg-aic-glow">
+    <div class="frame">
+      <div class="aic-wrap">
+        <div class="aic-head">
+          <span class="mark"><span class="dot"></span>&nbsp;The AI Collective · Buenos Aires</span>
+          <span>03 / 28 · Chapter local</span>
+        </div>
+
+        <div class="aic-hero">
+          <div class="left">
+            <span class="eyebrow"><span class="sq"></span>The AI Collective Buenos Aires</span>
+            <h1>Hecho para<br><em>manijas</em>.</h1>
+            <p class="lede">El nodo local de la red global. <b>Workshops, charlas, demo nights y hackathons</b> — todo lo que mueve a builders, founders, devs y researchers de IA aplicada en BA. Un objetivo claro: <b>ser la comunidad de IA más grande de Argentina en 2027</b>.</p>
+            <div class="qr-cta">
+              <span class="qr-label">Escaneá el QR →</span>
+              <span class="qr-meta">Sumate al WhatsApp del chapter</span>
+            </div>
+          </div>
+          <div class="right">
+            <div class="qr-frame">
+              <div class="qr-slot">
+                <img src="assets/qrgrupo-AICollective.png" alt="QR Grupo AI Collective">
+              </div>
+              <span class="qr-foot">aicollective.bsas</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="aic-pillars">
+          <div class="col">
+            <span class="num">↗ Mayo · 2026</span>
+            <h4>Primer encuentro</h4>
+            <p>Hoy <b>abrimos la rama</b> con este gran workshop de Claude. Si sale bien, somos <b>muy ambiciosos</b>.</p>
+          </div>
+          <div class="col">
+            <span class="num">↗ Junio — Julio · 2026</span>
+            <h4>Edición completa</h4>
+            <p><b>Workshops, charlas, demo nights y hackathon</b> — el formato largo del chapter para builders manija.</p>
+          </div>
+          <div class="col">
+            <span class="num">↗ Visión 2027</span>
+            <h4>La más grande del país</h4>
+            <p>Convertir a esta comunidad en <b>la más grande de Argentina</b>.</p>
+          </div>
+        </div>
+        <div class="footbar on-dark">
+          <div class="host">
+            <img src="assets/logo-aicollective-white.png" alt="The AI Collective">
+            <span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span>
+          </div>
+          <div class="partners">
+            <span class="lbl">Aliados</span>
+            <img class="anth-icon" src="assets/icon-anthropic.png" alt="Anthropic">
+            <span class="sep"></span>
+            <img class="galo" src="assets/logo-galo.png" alt="Galo">
+            <span class="sep"></span>
+            <span class="wemil-chip"><img src="assets/logo-wemil.png" alt="We Make It Lab"> We Make It Lab</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 04 — XPLORA (purple feature) ============ -->
+  <section class="bg-purple">
+    <div class="frame">
+      <div class="xpl-wrap">
+        <div class="topbar on-dark" style="color:rgba(255,255,255,0.7);">
+          <span class="mark" style="color:#fff;"><span class="dot" style="background:var(--orange);"></span>&nbsp;Xplora · UCEMA</span>
+          <span>04 / 28 · Co-host</span>
+        </div>
+
+        <div class="xpl-hero">
+          <div class="left">
+            <span class="eyebrow"><span class="sq"></span>Co-host del workshop</span>
+            <h1><em>Xplora</em><br>UCEMA.</h1>
+            <p class="lede"><b>Xplora</b> es una comunidad estudiantil donde los alumnos exploran quiénes quieren ser, qué industrias los inspiran y qué proyectos quieren construir.<br><br>Conectamos <b>talento joven</b> con founders, startups, tecnología y experiencias reales del ecosistema emprendedor.</p>
+          </div>
+          <div class="right">
+            <div class="xpl-visual-stack">
+              <div class="xpl-compass">
+                <img src="assets/logo-xplora.png" alt="Xplora">
+              </div>
+              <div class="xpl-qr-slot">
+                <a href="https://xploraucema.com/" target="_blank" rel="noopener">
+                  <img src="assets/qr_pagxplora.png" alt="QR Xplora">
+                </a>
+                <span class="xpl-qr-label">xploraucema.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="xpl-three">
+          <div class="col">
+            <span class="k">Comunidad</span>
+            <span class="v">Estudiantes UCEMA interesados en startups, tecnología, IA y <em>negocios digitales</em>.</span>
+          </div>
+          <div class="col">
+            <span class="k">Iniciativas</span>
+            <span class="v">Eventos, workshops, jobs board, challenges y <em>networking</em>.</span>
+          </div>
+          <div class="col">
+            <span class="k">Propósito</span>
+            <span class="v">Explorar, aprender y construir junto al <em>ecosistema emprendedor</em>.</span>
+          </div>
+        </div>
+        <div class="footbar on-dark">
+          <div class="host">
+            <img src="assets/logo-aicollective-white.png" alt="The AI Collective">
+            <span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span>
+          </div>
+          <div class="partners">
+            <span class="lbl">Aliados</span>
+            <img class="anth-icon" src="assets/icon-anthropic.png" alt="Anthropic">
+            <span class="sep"></span>
+            <img class="galo" src="assets/logo-galo.png" alt="Galo">
+            <span class="sep"></span>
+            <span class="wemil-chip"><img src="assets/logo-wemil.png" alt="We Make It Lab"> We Make It Lab</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 05 — XPLORA legacy / past speakers ============ -->
+  <section class="bg-purple">
+    <div class="frame">
+      <div class="xpl-legacy">
+        <div class="topbar on-dark" style="color:rgba(255,255,255,0.7);">
+          <span class="mark" style="color:#fff;"><span class="dot" style="background:var(--orange);"></span>&nbsp;Xplora · UCEMA</span>
+          <span>05 / 28 · Trayectoria</span>
+        </div>
+
+        <div class="lg-head">
+          <h2>Donde la <em>industria</em><br>pasa por el aula.</h2>
+          <p class="kicker">Xplora acerca a los estudiantes de UCEMA a <b>founders, CEOs y referentes</b> que están construyendo la economía digital, tecnológica y emprendedora de la región.</p>
+        </div>
+
+        <div class="xpl-stats">
+          <div class="col"><span class="n">+200</span><span class="l">Asistentes en un evento récord</span></div>
+          <div class="col"><span class="n">+10</span><span class="l">Speakers de primer nivel</span></div>
+          <div class="col"><span class="n">+5</span><span class="l">Eventos y encuentros en el último ciclo</span></div>
+        </div>
+
+        <div class="xpl-speakers">
+          <div class="sp feature">
+            <span class="yr">CTO · Unicornio</span>
+            <h3 class="name">Daniel<br><em>Rabinovich.</em></h3>
+            <p class="role">CTO de <b>Mercado Libre</b>, la empresa tech más grande de Latinoamérica.</p>
+          </div>
+          <div class="sp feature">
+            <span class="yr">CEO · Unicornio</span>
+            <h3 class="name">Martín<br><em>Migoya.</em></h3>
+            <p class="role">Co-founder y CEO de <b>Globant</b>, una de las tech públicas más grandes de Latinoamérica.</p>
+          </div>
+          <div class="sp">
+            <span class="yr">Founder · LATAM</span>
+            <h3 class="name">Hernán<br><em>Kazah.</em></h3>
+            <p class="role">Co-founder de <b>Mercado Libre</b> y managing partner en <b>Kaszek</b>, el fondo de VC más grande de la región.</p>
+          </div>
+          <div class="sp more">
+            <span class="yr">Y muchos más</span>
+            <div class="plus">+</div>
+            <p class="role">Marcelo Cavazzoli, Nahuel Lema, Beltrán Briones y otros líderes del ecosistema <b>tech &amp; emprendedor</b>.</p>
+          </div>
+        </div>
+        <div class="footbar on-dark">
+          <div class="host">
+            <img src="assets/logo-aicollective-white.png" alt="The AI Collective">
+            <span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span>
+          </div>
+          <div class="partners">
+            <span class="lbl">Aliados</span>
+            <img class="anth-icon" src="assets/icon-anthropic.png" alt="Anthropic">
+            <span class="sep"></span>
+            <img class="galo" src="assets/logo-galo.png" alt="Galo">
+            <span class="sep"></span>
+            <span class="wemil-chip"><img src="assets/logo-wemil.png" alt="We Make It Lab"> We Make It Lab</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 06 — Anfitriones y Aliados ============ -->
+  <section class="bg-cream">
+    <div class="ring" style="width:720px;height:720px;left:-260px;top:-260px;"></div>
+    <div class="blob" style="width:280px;height:280px;right:80px;bottom:-100px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>06 / 28 · Red</span>
+      </div>
+
+      <div class="section-head">
+        <h2>Una red de <em>innovación</em>:<br>anfitriones y aliados.</h2>
+        <p class="kicker">Dos anfitriones que aportan comunidad y sede, tres aliados que aportan <b>tecnología, presentación y challenge final</b>.</p>
+      </div>
+
+      <div class="sponsors-tier">
+        <div class="tier-label">
+          <span class="badge">Anfitriones</span>
+          <span class="rule"></span>
+          <span class="meta">Comunidad · Sede</span>
+        </div>
+        <div class="tier-row-2">
+          <div class="logo-card tall aic-brand">
+            <img class="aic-logo-lg" src="assets/logo-aicollective-full.png" alt="The AI Collective">
+            <span class="lbl">The AI Collective Buenos Aires</span>
+          </div>
+          <div class="logo-card tall xplora-brand">
+            <span class="xpl-chip-lg"><img src="assets/logo-xplora.png" alt="Xplora"></span>
+            <span class="xpl-wordmark">Xplora</span>
+            <span class="lbl">Xplora · UCEMA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sponsors-tier" style="margin-top:24px;">
+        <div class="tier-label">
+          <span class="badge">Aliados</span>
+          <span class="rule"></span>
+          <span class="meta">Charla · Presentación · Challenge</span>
+        </div>
+        <div class="tier-row-3">
+          <div class="logo-card"><img class="anth" src="assets/logo-anthropic.png" alt="Anthropic"><span class="lbl">Anthropic · Charla introductoria</span></div>
+          <div class="logo-card"><img class="wemil" src="assets/logo-wemil.png" alt="We Make It Lab"><span class="lbl">We Make It Lab · Sesión Anthropic</span></div>
+          <div class="logo-card"><img class="galo" src="assets/logo-galo.png" alt="Galo"><span class="lbl">Galo · Challenge final</span></div>
+        </div>
+      </div>
+
+      <div class="footbar on-cream">
+        <div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div>
+        <div class="partners"><span class="lbl">Aliados</span><img class="anth-icon" src="assets/icon-anthropic.png" alt="Anthropic"><span class="sep"></span><img class="galo" src="assets/logo-galo.png" alt="Galo"><span class="sep"></span><span class="wemil-chip"><img src="assets/logo-wemil.png" alt="We Make It Lab"> We Make It Lab</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 06 — Anthropic divider ============ -->
+  <section class="bg-cream">
+    <div class="blob" style="width:540px;height:540px;right:-200px;top:-180px;"></div>
+    <div class="ring" style="width:360px;height:360px;left:-120px;bottom:-120px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>07 / 28 · Sesión 01</span>
+      </div>
+      <div class="session-divider">
+        <div class="left">
+          <div class="num-block"><span class="big">01</span><span class="lbl">Sesión Anthropic</span></div>
+          <h1>Una mirada a<br><em>Claude</em>.</h1>
+          <div style="display:flex;align-items:center;gap:28px;">
+            <img src="assets/icon-anthropic.png" alt="Anthropic" style="height:20px;width:auto;mix-blend-mode:multiply;">
+            <img src="assets/logo-wemil.png" alt="We Make It Lab" style="height:20px;width:auto;filter:brightness(0);">
+          </div>
+        </div>
+        <div class="speaker-card">
+          <span class="sp-role"><img src="assets/icon-anthropic.png" alt="Anthropic"> Charla introductoria · Anthropic × We Make It Lab</span>
+          <h3 class="sp-name">Cristian<br><em>Cabrera.</em></h3>
+          <p class="sp-bio"><b>Founder</b> de We Make It Lab, partner oficial de <b>Anthropic</b>. Abre el evento con una mirada introductoria a Claude y al stack de la compañía.</p>
+        </div>
+      </div>
+      <div class="footbar on-cream">
+        <div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div>
+        <div class="partners"><span class="lbl">Sesión</span><img class="anth" src="assets/logo-anthropic.png" alt="Anthropic"><span class="sep"></span><span class="wemil-chip"><img src="assets/logo-wemil.png" alt="We Make It Lab"> We Make It Lab</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 07 — Anthropic 02 ============ -->
+  <section class="bg-cream">
+    <div class="ring" style="width:480px;height:480px;right:-160px;bottom:-180px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>08 / 28 · Sesión Anthropic</span>
+      </div>
+      <div class="content-placeholder">
+        <span class="ph-eyebrow"><span class="sq"></span>Sesión 01 · Anthropic <span class="meta">— Cristian Cabrera</span></span>
+        <h2>Título del <em>tema</em><br>02 de 03.</h2>
+        <div class="slot"><div class="block lead"><span class="tag">Idea principal</span><h4>Concepto <em>central</em><br>del bloque.</h4><p>Bloque dominante: titular del tema, demo o visualización clave.</p></div><div class="block"><span class="tag">Detalle / Demo</span><p>Captura, esquema o fragmento que sostiene la idea.</p></div><div class="block"><span class="tag">Takeaway</span><p>La frase que el público se lleva al final.</p></div></div>
+      </div>
+      <div class="footbar on-cream">
+        <div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div>
+        <div class="partners"><span class="lbl">Sesión</span><img class="anth-icon" src="assets/icon-anthropic.png" alt="Anthropic"><span class="sep"></span><span class="wemil-chip"><img src="assets/logo-wemil.png" alt="We Make It Lab"> We Make It Lab</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 08 — Anthropic 03 ============ -->
+  <section class="bg-cream">
+    <div class="blob" style="width:380px;height:380px;left:-140px;top:-120px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>09 / 28 · Sesión Anthropic</span>
+      </div>
+      <div class="content-placeholder">
+        <span class="ph-eyebrow"><span class="sq"></span>Sesión 01 · Anthropic <span class="meta">— Cristian Cabrera</span></span>
+        <h2>Título del <em>tema</em><br>03 de 03.</h2>
+        <div class="slot"><div class="block lead"><span class="tag">Idea principal</span><h4>Concepto <em>central</em><br>del bloque.</h4><p>Bloque dominante: titular del tema, demo o visualización clave.</p></div><div class="block"><span class="tag">Detalle / Demo</span><p>Captura, esquema o fragmento que sostiene la idea.</p></div><div class="block"><span class="tag">Takeaway</span><p>La frase que el público se lleva al final.</p></div></div>
+      </div>
+      <div class="footbar on-cream">
+        <div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div>
+        <div class="partners"><span class="lbl">Sesión</span><img class="anth-icon" src="assets/icon-anthropic.png" alt="Anthropic"><span class="sep"></span><span class="wemil-chip"><img src="assets/logo-wemil.png" alt="We Make It Lab"> We Make It Lab</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 09 — Jimmy divider ============ -->
+  <section class="bg-cream">
+    <div class="blob" style="width:600px;height:600px;left:-220px;top:-200px;"></div>
+    <div class="ring" style="width:380px;height:380px;right:80px;bottom:-160px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>10 / 28 · Sesión 02</span>
+      </div>
+      <div class="session-divider">
+        <div class="left">
+          <div class="num-block"><span class="big">02</span><span class="lbl">Workshop principal</span></div>
+          <h1>Construí tu<br><em>second brain</em>.</h1>
+          <span class="brand-stamp">Lideki · Sin Jr No Hay Sr</span>
+        </div>
+        <div class="speaker-card">
+          <span class="sp-role">Workshop principal · Lideki</span>
+          <h3 class="sp-name">Jimmy<br><em>Adaro.</em></h3>
+          <p class="sp-bio"><b>Co-founder, Tech &amp; Ops</b> en Lideki. Founder de <b>Sin Jr No Hay Sr</b> (+165K). Lleva el corazón del workshop con demo en vivo de Claude + Obsidian.</p>
+        </div>
+      </div>
+      <div class="footbar on-cream">
+        <div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div>
+        <div class="partners"><span class="lbl">Workshop · Lideki</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDES 11–15 Jimmy · Second Brain (PDF) ============ -->
+  <section class="bg-cream">
+    <div class="ring" style="width:420px;height:420px;right:-140px;top:-120px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>11 / 28 · Sesión Jimmy</span></div>
+      <div class="jim-page">
+        <div class="jim-left">
+          <div class="jim-num">01<span class="of">/ 05</span></div>
+          <span class="jim-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span>
+          <h2 class="jim-h">¿Qué es un<br><em>second brain</em>?</h2>
+          <p class="jim-kicker">Un setup que <b>ya conoce quién sos</b>, en qué trabajás y todo lo que capturaste — antes de que escribas una sola palabra.</p>
+        </div>
+        <div class="jim-right">
+          <div class="jim-lead">
+            <span class="tag">La promesa</span>
+            <h4>No es un <em>chatbot</em>.<br>Es un asistente que nunca <em>olvida</em>.</h4>
+            <p class="body">Nunca duerme, nunca olvida, <b>mejora cada día</b>. Cada mañana, antes de que abras el editor, Claude ya tiene tu contexto cargado.</p>
+          </div>
+          <div class="jim-row">
+            <div class="jim-card"><span class="tag">Cada mañana sabe</span><p><b>Quién sos</b> · perfil, tools, contexto.<br><b>Qué construís</b> · proyectos, tareas, metas.<br><b>Todo lo capturado</b> · ideas, notas, highlights.</p></div>
+            <div class="jim-card alt"><span class="tag">Por qué importa</span><p>Dejás de empezar cada conversación <b>desde cero</b>. El contexto deja de ser tu problema.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
+    </div>
+  </section>
+
+  <section class="bg-cream">
+    <div class="blob" style="width:320px;height:320px;left:-100px;bottom:-120px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>12 / 28 · Sesión Jimmy</span></div>
+      <div class="jim-page">
+        <div class="jim-left">
+          <div class="jim-num">02<span class="of">/ 05</span></div>
+          <span class="jim-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span>
+          <h2 class="jim-h">De cero a online<br>en <em>horas</em>.</h2>
+          <p class="jim-kicker">Cuatro pasos, no más. El primer commit del segundo cerebro <b>cabe en una tarde</b>.</p>
+        </div>
+        <div class="jim-right">
+          <div class="jim-lead">
+            <span class="tag">Los 4 pasos</span>
+            <h4><em>Descargar</em> → <em>Instalar</em> →<br><em>Apuntar</em> → <em>Aplicar prompt</em>.</h4>
+            <p class="body"><b>1.</b> Descargar el vault &nbsp;·&nbsp; <b>2.</b> Instalar Claude Code &nbsp;·&nbsp; <b>3.</b> Apuntarlo al vault &nbsp;·&nbsp; <b>4.</b> Aplicar el prompt maestro.</p>
+          </div>
+          <div class="jim-row">
+            <div class="jim-card"><span class="tag">¿Sin material?</span><p>Abrí Claude Chat, hablá <b>20 minutos</b> sobre tu trabajo y metas, guardá esa charla como tu <b>memoria inicial</b>.</p></div>
+            <div class="jim-card alt"><span class="tag">Insight</span><p>El vault <b>no necesita estar completo</b> para ser útil. Empezá chico, crece solo.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
+    </div>
+  </section>
+
+  <section class="bg-cream">
+    <div class="ring" style="width:600px;height:600px;right:-200px;bottom:-240px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>13 / 28 · Sesión Jimmy</span></div>
+      <div class="jim-page">
+        <div class="jim-left">
+          <div class="jim-num">03<span class="of">/ 05</span></div>
+          <span class="jim-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span>
+          <h2 class="jim-h">¿Qué va<br>en tu <em>vault</em>?</h2>
+          <p class="jim-kicker">Todo lo que <b>consumiste este año</b> y simplemente desapareció — más todo lo que producís cada día.</p>
+        </div>
+        <div class="jim-right">
+          <div class="jim-lead">
+            <span class="tag">El material crudo</span>
+            <h4>Lo que <em>terminaste</em> y olvidaste.<br>Lo que <em>guardaste</em> y nunca reabriste.</h4>
+            <p class="body">El conocimiento no se pierde porque sea malo — se pierde porque <b>nunca lo volviste a abrir</b>.</p>
+          </div>
+          <div class="jim-row">
+            <div class="jim-card"><span class="tag">Consumo</span><p><b>Libros y podcasts</b> que terminaste y olvidaste. <b>Artículos y highlights</b> guardados a las 11pm.</p></div>
+            <div class="jim-card alt"><span class="tag">Trabajo</span><p><b>Notas de proyectos</b>, decisiones, transcripciones de llamadas, lecciones aprendidas.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
+    </div>
+  </section>
+
+  <section class="bg-cream">
+    <div class="blob" style="width:480px;height:480px;right:-160px;top:-160px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>14 / 28 · Sesión Jimmy</span></div>
+      <div class="jim-page">
+        <div class="jim-left">
+          <div class="jim-num">04<span class="of">/ 05</span></div>
+          <span class="jim-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span>
+          <h2 class="jim-h">El loop del<br><em>día a día</em>.</h2>
+          <p class="jim-kicker">Tres acciones encadenadas y un mantenimiento automático — el conocimiento <b>se acumula solo</b>.</p>
+        </div>
+        <div class="jim-right">
+          <div class="jim-lead">
+            <span class="tag">Ingerir → Consultar → Guardar</span>
+            <h4>Clip un artículo. <em>Pregúntale</em> al wiki.<br>Guardá la respuesta.</h4>
+            <p class="body"><b>Ingerir:</b> con Web Clipper, Claude vincula el material con 10–15 páginas del wiki y <b>detecta conexiones y contradicciones</b>.</p>
+          </div>
+          <div class="jim-row">
+            <div class="jim-card"><span class="tag">Consultar</span><p>Preguntás al wiki · Claude escanea el índice, extrae las páginas y responde <b>con citas</b>.</p></div>
+            <div class="jim-card alt"><span class="tag">Lint semanal</span><p>Un comando mantiene la base saludable. El <b>mantenimiento deja de ser tu trabajo</b>.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
+    </div>
+  </section>
+
+  <section class="bg-cream">
+    <div class="ring" style="width:380px;height:380px;left:-130px;top:-120px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>15 / 28 · Sesión Jimmy</span></div>
+      <div class="jim-page">
+        <div class="jim-left">
+          <div class="jim-num">05<span class="of">/ 05</span></div>
+          <span class="jim-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span>
+          <h2 class="jim-h">Construilo una vez.<br>Usalo <em>para siempre</em>.</h2>
+          <p class="jim-kicker">Vannevar Bush soñó el <b>Memex en 1945</b>. El problema que no pudo resolver: <b>¿quién hace el mantenimiento?</b> Ahora ya lo sabés.</p>
+        </div>
+        <div class="jim-right">
+          <div class="jim-lead">
+            <span class="tag">El reparto</span>
+            <h4><em>Humano:</em> curar, preguntar, pensar.<br><em>Claude:</em> resumir, cruzar, mantener.</h4>
+            <p class="body">El trabajo del humano es <b>el significado</b>. El trabajo de Claude es el <b>sistema</b> que sostiene ese significado en el tiempo.</p>
+          </div>
+          <div class="jim-row">
+            <div class="jim-card"><span class="tag">Por qué casi nadie lo tiene</span><p>El ciclo: empezás organizado, el <b>mantenimiento se acumula</b>, lo abandonás, el sistema se degrada. Claude rompe el ciclo.</p></div>
+            <div class="jim-card alt"><span class="tag">Insight final</span><p>Reorganizar todo el vault es <b>un prompt</b>. Migrar desde Notion es <b>un comando</b>. El costo de cambio se vuelve cero.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
+    </div>
+  </section>
+
+    <!-- ============ SLIDE 15 — Luciano divider ============ -->
+  <section class="bg-cream">
+    <div class="blob" style="width:540px;height:540px;right:-180px;top:-160px;"></div>
+    <div class="ring" style="width:320px;height:320px;left:-100px;bottom:-100px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>16 / 28 · Sesión 03</span></div>
+      <div class="session-divider">
+        <div class="left">
+          <div class="num-block"><span class="big">03</span><span class="lbl">Framework</span></div>
+          <h1>Los 7 niveles de Claude<br><em>(y por qué frenar en el 4)</em></h1>
+          <span class="brand-stamp">Cybersecurity Architect &amp; Applied AI Engineer</span>
+        </div>
+        <div class="speaker-card">
+          <span class="sp-role">Framework</span>
+          <h3 class="sp-name">Luciano<br><em>Esteban</em></h3>
+          <p class="sp-bio"><b>Cybersecurity Architect</b> en Personal Argentina. Apasionado por la IA aplicada, desmitifica la sobreingeniería y enseña cómo usar Claude y Obsidian para iterar más rápido y aportar valor real sin fricción técnica.</p>
+        </div>
+      </div>
+      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Framework</span></div></div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE Luciano 00 — Levantá la mano (setup interactivo) ============ -->
+  <section class="bg-navy">
+    <div class="frame">
+      <div class="topbar on-dark">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>17 / 28 · Sesión Luciano</span>
+      </div>
+      <div class="luc-handson">
+        <span class="luc-handson-ew">Experimento en vivo</span>
+        <h1 class="luc-handson-h1">Levantá<br>la <em>mano.</em></h1>
+        <svg viewBox="0 0 840 140" xmlns="http://www.w3.org/2000/svg" style="width:700px;max-width:100%;" aria-hidden="true">
+          <circle cx="60"  cy="70" r="46" fill="rgba(255,112,51,0.04)" stroke="rgba(255,112,51,0.15)" stroke-width="1.5"/>
+          <text x="60"  y="80" text-anchor="middle" font-family="DM Serif Display,serif" font-size="40" fill="rgba(255,255,255,0.15)" font-style="italic">?</text>
+          <circle cx="180" cy="70" r="46" fill="rgba(255,112,51,0.07)" stroke="rgba(255,112,51,0.22)" stroke-width="1.5"/>
+          <text x="180" y="80" text-anchor="middle" font-family="DM Serif Display,serif" font-size="40" fill="rgba(255,255,255,0.22)" font-style="italic">?</text>
+          <circle cx="300" cy="70" r="46" fill="rgba(255,112,51,0.09)" stroke="rgba(255,112,51,0.29)" stroke-width="1.5"/>
+          <text x="300" y="80" text-anchor="middle" font-family="DM Serif Display,serif" font-size="40" fill="rgba(255,255,255,0.29)" font-style="italic">?</text>
+          <circle cx="420" cy="70" r="46" fill="rgba(255,112,51,0.12)" stroke="rgba(255,112,51,0.36)" stroke-width="1.5"/>
+          <text x="420" y="80" text-anchor="middle" font-family="DM Serif Display,serif" font-size="40" fill="rgba(255,255,255,0.36)" font-style="italic">?</text>
+          <circle cx="540" cy="70" r="46" fill="rgba(255,112,51,0.14)" stroke="rgba(255,112,51,0.42)" stroke-width="1.5"/>
+          <text x="540" y="80" text-anchor="middle" font-family="DM Serif Display,serif" font-size="40" fill="rgba(255,255,255,0.42)" font-style="italic">?</text>
+          <circle cx="660" cy="70" r="46" fill="rgba(255,112,51,0.16)" stroke="rgba(255,112,51,0.50)" stroke-width="2"/>
+          <text x="660" y="80" text-anchor="middle" font-family="DM Serif Display,serif" font-size="40" fill="rgba(255,255,255,0.50)" font-style="italic">?</text>
+          <circle cx="780" cy="70" r="46" fill="rgba(255,112,51,0.19)" stroke="rgba(255,112,51,0.60)" stroke-width="2"/>
+          <text x="780" y="80" text-anchor="middle" font-family="DM Serif Display,serif" font-size="40" fill="rgba(255,255,255,0.58)" font-style="italic">?</text>
+        </svg>
+        <span style="font-family:var(--mono);font-size:17px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.22);">¿hasta cuál llegaste?</span>
+      </div>
+      <div class="footbar on-dark">
+        <div class="host"><img src="assets/logo-aicollective-white.png" alt="The AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="partners"><span class="lbl">Framework</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE Luciano 01 — El Experimento (apertura interactiva) ============ -->
+  <section class="bg-navy">
+    <div class="frame">
+      <div class="topbar on-dark">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>18 / 28 · Sesión Luciano</span>
+      </div>
+      <div class="luc-exp">
+        <div class="luc-exp-text">
+          <span class="eyebrow">Memoria en IA</span>
+          <h1>7 <em>Niveles.</em></h1>
+        </div>
+        <div class="luc-visual">
+          <svg viewBox="0 -28 560 448" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="10"  y="390" width="60" height="20"  fill="rgba(255,112,51,0.18)" rx="3"/>
+            <rect x="90"  y="340" width="60" height="70"  fill="rgba(255,112,51,0.30)" rx="3"/>
+            <rect x="170" y="275" width="60" height="135" fill="rgba(255,112,51,0.43)" rx="3"/>
+            <rect x="250" y="205" width="60" height="205" fill="rgba(255,112,51,0.56)" rx="3"/>
+            <rect x="330" y="135" width="60" height="275" fill="rgba(255,112,51,0.70)" rx="3"/>
+            <rect x="410" y="68"  width="60" height="342" fill="rgba(255,112,51,0.85)" rx="3"/>
+            <rect x="490" y="10"  width="60" height="400" fill="#ff7033" rx="3"/>
+            <text x="40"  y="382" text-anchor="middle" font-family="DM Serif Display,serif" font-size="20" fill="rgba(255,255,255,0.30)" font-style="italic">1</text>
+            <text x="120" y="332" text-anchor="middle" font-family="DM Serif Display,serif" font-size="20" fill="rgba(255,255,255,0.42)" font-style="italic">2</text>
+            <text x="200" y="267" text-anchor="middle" font-family="DM Serif Display,serif" font-size="20" fill="rgba(255,255,255,0.54)" font-style="italic">3</text>
+            <text x="280" y="197" text-anchor="middle" font-family="DM Serif Display,serif" font-size="20" fill="rgba(255,255,255,0.66)" font-style="italic">4</text>
+            <text x="360" y="127" text-anchor="middle" font-family="DM Serif Display,serif" font-size="20" fill="rgba(255,255,255,0.80)" font-style="italic">5</text>
+            <text x="440" y="60"  text-anchor="middle" font-family="DM Serif Display,serif" font-size="20" fill="rgba(255,255,255,0.92)" font-style="italic">6</text>
+            <text x="520" y="2"   text-anchor="middle" font-family="DM Serif Display,serif" font-size="26" fill="#fff" font-style="italic">7</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footbar on-dark">
+        <div class="host"><img src="assets/logo-aicollective-white.png" alt="The AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="partners"><span class="lbl">Framework</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE Luciano 02 — Nivel 01 Automemory ============ -->
+  <section class="bg-cream">
+    <div class="blob" style="width:480px;height:480px;right:-160px;top:-160px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>19 / 28 · Sesión Luciano</span>
+      </div>
+      <div class="luc-split">
+        <div class="luc-left">
+          <div class="luc-badge"><span class="n">01</span><span class="of7">/ 07</span></div>
+          <h2>Auto­<em>memory.</em></h2>
+          <div class="luc-concept"><p>Claude anota y recuerda en segundo plano, <b>sin que le pidamos nada</b>. El default de casi todos.</p></div>
+          <div class="luc-reto"><span class="tag">Reto</span><p><b>Context rot:</b> sesiones largas → el modelo se marea con su propia info. Calidad baja, tokens suben.</p></div>
+        </div>
+        <div class="luc-visual">
+          <svg viewBox="0 0 460 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- glow rings -->
+            <circle cx="230" cy="205" r="170" fill="none" stroke="rgba(193,95,60,0.06)" stroke-width="2"/>
+            <circle cx="230" cy="205" r="128" fill="none" stroke="rgba(193,95,60,0.11)" stroke-width="1.5" stroke-dasharray="8 6"/>
+            <!-- thick loop arc ~330° -->
+            <path d="M 230 77 A 128 128 0 1 1 114 305" fill="none" stroke="var(--terra)" stroke-width="9" stroke-linecap="round"/>
+            <polygon points="96,318 120,292 138,318" fill="var(--terra)"/>
+            <!-- center memory node -->
+            <circle cx="230" cy="205" r="54" fill="rgba(193,95,60,0.10)" stroke="var(--terra)" stroke-width="3"/>
+            <text x="230" y="198" text-anchor="middle" font-family="Manrope,sans-serif" font-size="15" font-weight="700" fill="var(--terra)">AUTO</text>
+            <text x="230" y="218" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" fill="rgba(193,95,60,0.65)">memory</text>
+            <!-- orbiting data blobs -->
+            <circle cx="358" cy="128" r="11" fill="rgba(193,95,60,0.14)" stroke="var(--terra)" stroke-width="1.5"/>
+            <text x="373" y="125" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(193,95,60,0.7)">ctx</text>
+            <circle cx="348" cy="292" r="9" fill="rgba(193,95,60,0.12)" stroke="var(--terra)" stroke-width="1.5"/>
+            <text x="361" y="296" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(193,95,60,0.6)">log</text>
+            <circle cx="116" cy="96" r="10" fill="rgba(193,95,60,0.12)" stroke="var(--terra)" stroke-width="1.5"/>
+            <text x="128" y="93" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(193,95,60,0.6)">msg</text>
+            <circle cx="95" cy="188" r="7" fill="rgba(193,95,60,0.10)" stroke="var(--terra)" stroke-width="1.5"/>
+            <!-- warning triangle -->
+            <path d="M 346 378 L 400 378 L 373 332 Z" fill="rgba(193,95,60,0.11)" stroke="var(--terra)" stroke-width="2.5" stroke-linejoin="round"/>
+            <text x="373" y="372" text-anchor="middle" font-family="Manrope,sans-serif" font-size="22" font-weight="700" fill="var(--terra)">!</text>
+            <text x="373" y="412" text-anchor="middle" font-family="Manrope,sans-serif" font-size="13" fill="var(--mute-on-cream)" font-style="italic">context rot</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footbar on-cream">
+        <div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="partners"><span class="lbl">Framework</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE Luciano 03 — Nivel 02 claude.md ============ -->
+  <section class="bg-cream">
+    <div class="ring" style="width:440px;height:440px;left:-160px;bottom:-160px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>20 / 28 · Sesión Luciano</span>
+      </div>
+      <div class="luc-split">
+        <div class="luc-left">
+          <div class="luc-badge"><span class="n">02</span><span class="of7">/ 07</span></div>
+          <h2>claude<em>.md</em></h2>
+          <div class="luc-concept"><p>Un archivo maestro con reglas y contexto del proyecto. <b>El índice que guía al modelo</b>, no la enciclopedia.</p></div>
+          <div class="luc-reto"><span class="tag">Reto</span><p>Inyectar reglas globales en <b>cada</b> prompt genera ruido. Funciona genial al arrancar, pero <b>no escala</b>.</p></div>
+        </div>
+        <div class="luc-visual">
+          <svg viewBox="0 0 480 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- input source pills on left -->
+            <rect x="10" y="38"  width="130" height="32" rx="5" fill="rgba(43,58,74,0.07)" stroke="var(--navy)" stroke-width="1.5"/>
+            <text x="75" y="59" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="var(--navy)">system prompt</text>
+            <rect x="10" y="88"  width="130" height="32" rx="5" fill="rgba(43,58,74,0.07)" stroke="var(--navy)" stroke-width="1.5"/>
+            <text x="75" y="109" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="var(--navy)">project rules</text>
+            <rect x="10" y="138" width="130" height="32" rx="5" fill="rgba(193,95,60,0.08)" stroke="var(--terra)" stroke-width="1.5"/>
+            <text x="75" y="159" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="var(--terra)">personas / tone</text>
+            <rect x="10" y="188" width="130" height="32" rx="5" fill="rgba(43,58,74,0.07)" stroke="var(--navy)" stroke-width="1.5"/>
+            <text x="75" y="209" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="var(--navy)">conventions</text>
+            <rect x="10" y="238" width="130" height="32" rx="5" fill="rgba(193,95,60,0.08)" stroke="var(--terra)" stroke-width="1.5"/>
+            <text x="75" y="259" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="var(--terra)">tech stack</text>
+            <!-- arrows into funnel -->
+            <line x1="140" y1="54"  x2="200" y2="140" stroke="rgba(43,58,74,0.22)" stroke-width="1.5"/>
+            <line x1="140" y1="104" x2="200" y2="155" stroke="rgba(43,58,74,0.22)" stroke-width="1.5"/>
+            <line x1="140" y1="154" x2="200" y2="170" stroke="rgba(193,95,60,0.30)" stroke-width="1.5"/>
+            <line x1="140" y1="204" x2="200" y2="185" stroke="rgba(43,58,74,0.22)" stroke-width="1.5"/>
+            <line x1="140" y1="254" x2="200" y2="200" stroke="rgba(193,95,60,0.30)" stroke-width="1.5"/>
+            <!-- funnel shape -->
+            <path d="M 200 100 H 340 L 295 220 H 245 Z" fill="rgba(193,95,60,0.09)" stroke="var(--terra)" stroke-width="2.5" stroke-linejoin="round"/>
+            <!-- claude.md document -->
+            <rect x="230" y="220" width="80" height="120" rx="4" fill="rgba(193,95,60,0.08)" stroke="var(--terra)" stroke-width="2.5"/>
+            <!-- document content lines -->
+            <line x1="240" y1="244" x2="300" y2="244" stroke="rgba(193,95,60,0.35)" stroke-width="1.5"/>
+            <line x1="240" y1="258" x2="292" y2="258" stroke="rgba(193,95,60,0.25)" stroke-width="1.5"/>
+            <line x1="240" y1="272" x2="300" y2="272" stroke="rgba(193,95,60,0.35)" stroke-width="1.5"/>
+            <line x1="240" y1="286" x2="280" y2="286" stroke="rgba(193,95,60,0.25)" stroke-width="1.5"/>
+            <line x1="240" y1="300" x2="300" y2="300" stroke="rgba(193,95,60,0.35)" stroke-width="1.5"/>
+            <!-- output arrow -->
+            <line x1="270" y1="340" x2="270" y2="378" stroke="var(--terra)" stroke-width="2.5" stroke-dasharray="5 3"/>
+            <polygon points="262,378 278,378 270,392" fill="var(--terra)"/>
+            <!-- labels -->
+            <text x="270" y="235" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="var(--terra)" font-weight="700">claude.md</text>
+            <text x="270" y="418" text-anchor="middle" font-family="Manrope,sans-serif" font-size="13" fill="var(--mute-on-cream)" font-style="italic">inyectado en cada prompt</text>
+            <!-- token cost badge -->
+            <rect x="340" y="268" width="120" height="30" rx="4" fill="rgba(193,95,60,0.12)" stroke="var(--terra)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="400" y="288" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="var(--terra)">↑ tokens / prompt</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footbar on-cream">
+        <div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="partners"><span class="lbl">Framework</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE Luciano 04 — Nivel 03 Multi-Archivo ============ -->
+  <section class="bg-cream">
+    <div class="blob" style="width:360px;height:360px;right:-120px;bottom:-120px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>21 / 28 · Sesión Luciano</span>
+      </div>
+      <div class="luc-split">
+        <div class="luc-left">
+          <div class="luc-badge"><span class="n">03</span><span class="of7">/ 07</span></div>
+          <h2>Multi-<em>Archivo.</em></h2>
+          <div class="luc-concept"><p>Separar la memoria <b>por propósito</b>: project, requirements, roadmap. El modelo lee solo lo que la tarea demanda.</p></div>
+          <div class="luc-reto"><span class="tag">Valor</span><p>Base fundacional para flujos eficientes. <b>Control total</b> sobre qué está leyendo la IA y cuándo.</p></div>
+        </div>
+        <div class="luc-visual">
+          <svg viewBox="0 0 480 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- root folder -->
+            <rect x="150" y="14" width="180" height="50" rx="6" fill="var(--navy)"/>
+            <text x="240" y="35" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(255,255,255,0.55)">📁 project/</text>
+            <text x="240" y="53" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="14" fill="#fff" font-weight="600">CLAUDE.md</text>
+            <!-- trunk line -->
+            <line x1="240" y1="64" x2="240" y2="100" stroke="rgba(43,58,74,0.35)" stroke-width="2"/>
+            <!-- horizontal bar -->
+            <line x1="90" y1="100" x2="390" y2="100" stroke="rgba(43,58,74,0.25)" stroke-width="1.5"/>
+            <!-- branch drops -->
+            <line x1="90"  y1="100" x2="90"  y2="130" stroke="rgba(43,58,74,0.25)" stroke-width="1.5"/>
+            <line x1="210" y1="100" x2="210" y2="130" stroke="rgba(43,58,74,0.25)" stroke-width="1.5"/>
+            <line x1="330" y1="100" x2="330" y2="130" stroke="rgba(43,58,74,0.25)" stroke-width="1.5"/>
+            <!-- file nodes -->
+            <rect x="18"  y="130" width="144" height="48" rx="5" fill="rgba(43,58,74,0.08)" stroke="var(--navy)" stroke-width="2"/>
+            <text x="90"  y="152" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(43,58,74,0.5)">📄</text>
+            <text x="90"  y="168" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="var(--navy)">requirements.md</text>
+            <rect x="138" y="130" width="144" height="48" rx="5" fill="rgba(193,95,60,0.13)" stroke="var(--terra)" stroke-width="2.5"/>
+            <text x="210" y="152" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(193,95,60,0.5)">📄</text>
+            <text x="210" y="168" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" fill="var(--terra)" font-weight="600">roadmap.md</text>
+            <rect x="258" y="130" width="144" height="48" rx="5" fill="rgba(43,58,74,0.06)" stroke="var(--navy)" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <text x="330" y="152" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(43,58,74,0.38)">📄</text>
+            <text x="330" y="168" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="var(--navy)" opacity="0.55">context.md</text>
+            <!-- sub-files under requirements -->
+            <line x1="90" y1="178" x2="90" y2="218" stroke="rgba(43,58,74,0.20)" stroke-width="1.5"/>
+            <rect x="34" y="218" width="112" height="36" rx="4" fill="rgba(43,58,74,0.05)" stroke="var(--navy)" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="90" y="241" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="var(--navy)" opacity="0.45">auth-req.md</text>
+            <!-- selective read arrow from Claude -->
+            <rect x="178" y="268" width="124" height="42" rx="6" fill="rgba(193,95,60,0.12)" stroke="var(--terra)" stroke-width="2"/>
+            <text x="240" y="287" text-anchor="middle" font-family="Manrope,sans-serif" font-size="13" fill="var(--terra)" font-weight="700">Claude</text>
+            <text x="240" y="302" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(193,95,60,0.65)">reads task-specific</text>
+            <!-- dashed read arrows from Claude up to each file -->
+            <line x1="220" y1="268" x2="160" y2="178" stroke="var(--terra)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <polygon points="156,170 166,182 174,172" fill="var(--terra)"/>
+            <line x1="240" y1="268" x2="240" y2="178" stroke="var(--terra)" stroke-width="2" stroke-dasharray="4 3"/>
+            <polygon points="232,178 248,178 240,164" fill="var(--terra)"/>
+            <text x="240" y="370" text-anchor="middle" font-family="Manrope,sans-serif" font-size="13" fill="var(--mute-on-cream)" font-style="italic">lee solo lo que la tarea demanda</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footbar on-cream">
+        <div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="partners"><span class="lbl">Framework</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE Luciano 05 — Nivel 04 Obsidian Vault ============ -->
+  <section class="bg-cream">
+    <div class="ring" style="width:500px;height:500px;left:-180px;top:-180px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>22 / 28 · Sesión Luciano</span>
+      </div>
+      <div class="luc-split">
+        <div class="luc-left">
+          <div class="luc-badge"><span class="n">04</span><span class="of7">/ 07</span></div>
+          <h2>Obsidian<br><em>Vault.</em></h2>
+          <div class="luc-concept"><p>Jerarquía <b>dura e interconectada</b>. Vault → Wiki → Index. El sweet spot del 99% de los casos de uso.</p></div>
+          <div class="luc-reto"><span class="tag">Valor</span><p>Costo cero, <b>control total</b>, sin latencias. Un vault bien indexado supera a casi cualquier RAG complejo.</p></div>
+        </div>
+        <div class="luc-visual">
+          <svg viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Layer label: Vault -->
+            <text x="28" y="30" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(106,53,194,0.55)" letter-spacing="0.12em">VAULT LAYER</text>
+            <!-- Layer label: Wiki -->
+            <text x="28" y="140" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(106,53,194,0.45)" letter-spacing="0.12em">WIKI LAYER</text>
+            <!-- Layer label: Notes -->
+            <text x="28" y="270" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(106,53,194,0.35)" letter-spacing="0.12em">NOTE LAYER</text>
+            <!-- Vault/Index root -->
+            <circle cx="240" cy="62" r="40" fill="var(--purple)"/>
+            <text x="240" y="57" text-anchor="middle" font-family="Manrope,sans-serif" font-size="13" fill="#fff" font-weight="700">Vault</text>
+            <text x="240" y="74" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(255,255,255,0.75)">Index</text>
+            <!-- Vault → Wiki links -->
+            <line x1="204" y1="94"  x2="136" y2="162" stroke="rgba(106,53,194,0.35)" stroke-width="2.5"/>
+            <line x1="240" y1="102" x2="240" y2="160" stroke="rgba(106,53,194,0.35)" stroke-width="2.5"/>
+            <line x1="276" y1="94"  x2="344" y2="162" stroke="rgba(106,53,194,0.35)" stroke-width="2.5"/>
+            <!-- Wiki nodes -->
+            <circle cx="136" cy="182" r="26" fill="rgba(106,53,194,0.14)" stroke="#6a35c2" stroke-width="2.5"/>
+            <text x="136" y="178" text-anchor="middle" font-family="Manrope,sans-serif" font-size="12" fill="#6a35c2" font-weight="700">Wiki</text>
+            <text x="136" y="193" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(106,53,194,0.65)">Security</text>
+            <circle cx="240" cy="182" r="26" fill="rgba(106,53,194,0.14)" stroke="#6a35c2" stroke-width="2.5"/>
+            <text x="240" y="178" text-anchor="middle" font-family="Manrope,sans-serif" font-size="12" fill="#6a35c2" font-weight="700">Wiki</text>
+            <text x="240" y="193" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(106,53,194,0.65)">Product</text>
+            <circle cx="344" cy="182" r="26" fill="rgba(106,53,194,0.14)" stroke="#6a35c2" stroke-width="2.5"/>
+            <text x="344" y="178" text-anchor="middle" font-family="Manrope,sans-serif" font-size="12" fill="#6a35c2" font-weight="700">Wiki</text>
+            <text x="344" y="193" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(106,53,194,0.65)">Arch</text>
+            <!-- Wiki-Wiki cross links -->
+            <line x1="162" y1="182" x2="214" y2="182" stroke="rgba(106,53,194,0.18)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <line x1="266" y1="182" x2="318" y2="182" stroke="rgba(106,53,194,0.18)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <!-- Wiki → Notes links -->
+            <line x1="120" y1="206" x2="82"  y2="280" stroke="rgba(106,53,194,0.22)" stroke-width="1.5"/>
+            <line x1="136" y1="208" x2="160" y2="280" stroke="rgba(106,53,194,0.22)" stroke-width="1.5"/>
+            <line x1="230" y1="207" x2="240" y2="280" stroke="rgba(106,53,194,0.22)" stroke-width="1.5"/>
+            <line x1="330" y1="206" x2="300" y2="280" stroke="rgba(106,53,194,0.22)" stroke-width="1.5"/>
+            <line x1="356" y1="207" x2="390" y2="280" stroke="rgba(106,53,194,0.22)" stroke-width="1.5"/>
+            <!-- Note nodes -->
+            <circle cx="82"  cy="294" r="16" fill="rgba(106,53,194,0.07)" stroke="#6a35c2" stroke-width="1.5"/>
+            <text x="82"  y="299" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#6a35c2">note</text>
+            <circle cx="160" cy="294" r="16" fill="rgba(106,53,194,0.07)" stroke="#6a35c2" stroke-width="1.5"/>
+            <text x="160" y="299" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#6a35c2">note</text>
+            <circle cx="240" cy="294" r="16" fill="rgba(106,53,194,0.07)" stroke="#6a35c2" stroke-width="1.5"/>
+            <text x="240" y="299" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#6a35c2">note</text>
+            <circle cx="300" cy="294" r="14" fill="rgba(106,53,194,0.06)" stroke="#6a35c2" stroke-width="1"/>
+            <text x="300" y="299" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#6a35c2" opacity="0.7">note</text>
+            <circle cx="390" cy="294" r="14" fill="rgba(106,53,194,0.06)" stroke="#6a35c2" stroke-width="1"/>
+            <text x="390" y="299" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#6a35c2" opacity="0.7">note</text>
+            <!-- note cross links -->
+            <line x1="98"  cy="294" x1="98"  y1="294" x2="144" y2="294" stroke="rgba(106,53,194,0.12)" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="176" cy="294" x1="176" y1="294" x2="224" y2="294" stroke="rgba(106,53,194,0.12)" stroke-width="1" stroke-dasharray="3 3"/>
+            <text x="240" y="390" text-anchor="middle" font-family="Manrope,sans-serif" font-size="13" fill="var(--mute-on-cream)" font-style="italic">jerarquía dura + links cruzados</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footbar on-cream">
+        <div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="partners"><span class="lbl">Framework</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE Luciano 06 — Nivel 05 Naive RAG ============ -->
+  <section class="bg-cream">
+    <div class="blob" style="width:400px;height:400px;left:-140px;bottom:-140px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>23 / 28 · Sesión Luciano</span>
+      </div>
+      <div class="luc-split">
+        <div class="luc-left">
+          <div class="luc-badge"><span class="n">05</span><span class="of7">/ 07</span></div>
+          <h2>Naive<br><em>RAG.</em></h2>
+          <div class="luc-concept"><p>Chunking básico: cortar documentos y buscar <b>similitud vectorial</b>. Útil para datos puntuales.</p></div>
+          <div class="luc-reto"><span class="tag">Reto</span><p>Rompe las relaciones. Si <b>A y B están separados</b> en el texto, el modelo no entiende cómo se conectan.</p></div>
+        </div>
+        <div class="luc-visual">
+          <svg viewBox="0 0 480 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Document source → chunking -->
+            <rect x="10" y="20" width="90" height="60" rx="4" fill="rgba(0,118,219,0.08)" stroke="var(--blue)" stroke-width="2"/>
+            <text x="55" y="44" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="var(--blue)">📄 doc.pdf</text>
+            <line x1="39" y1="52" x2="80" y2="52" stroke="rgba(0,118,219,0.25)" stroke-width="1"/>
+            <line x1="39" y1="60" x2="72" y2="60" stroke="rgba(0,118,219,0.25)" stroke-width="1"/>
+            <line x1="39" y1="68" x2="80" y2="68" stroke="rgba(0,118,219,0.25)" stroke-width="1"/>
+            <!-- chunking arrow -->
+            <line x1="100" y1="50" x2="140" y2="50" stroke="var(--blue)" stroke-width="2"/>
+            <polygon points="138,44 150,50 138,56" fill="var(--blue)"/>
+            <text x="120" y="42" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(0,118,219,0.65)">chunk</text>
+            <!-- scattered chunks — no connections between them -->
+            <circle cx="200" cy="46"  r="22" fill="rgba(0,118,219,0.14)" stroke="var(--blue)" stroke-width="2"/>
+            <text x="200" y="51" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" fill="var(--blue)" font-weight="600">§1</text>
+            <circle cx="310" cy="70"  r="18" fill="rgba(0,118,219,0.11)" stroke="var(--blue)" stroke-width="1.5"/>
+            <text x="310" y="75" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="var(--blue)" font-weight="600">§2</text>
+            <circle cx="420" cy="48"  r="20" fill="rgba(0,118,219,0.13)" stroke="var(--blue)" stroke-width="2"/>
+            <text x="420" y="53" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="var(--blue)" font-weight="600">§3</text>
+            <circle cx="170" cy="148" r="20" fill="rgba(0,118,219,0.12)" stroke="var(--blue)" stroke-width="1.5"/>
+            <text x="170" y="153" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="var(--blue)" font-weight="600">§4</text>
+            <circle cx="280" cy="160" r="24" fill="rgba(0,118,219,0.17)" stroke="var(--blue)" stroke-width="2"/>
+            <text x="280" y="165" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" fill="var(--blue)" font-weight="600">§5</text>
+            <circle cx="400" cy="140" r="16" fill="rgba(0,118,219,0.10)" stroke="var(--blue)" stroke-width="1.5"/>
+            <text x="400" y="145" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="var(--blue)" font-weight="600">§6</text>
+            <circle cx="155" cy="252" r="18" fill="rgba(0,118,219,0.11)" stroke="var(--blue)" stroke-width="1.5"/>
+            <text x="155" y="257" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="var(--blue)" font-weight="600">§7</text>
+            <circle cx="330" cy="240" r="22" fill="rgba(0,118,219,0.14)" stroke="var(--blue)" stroke-width="2"/>
+            <text x="330" y="245" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" fill="var(--blue)" font-weight="600">§8</text>
+            <circle cx="450" cy="260" r="15" fill="rgba(0,118,219,0.09)" stroke="var(--blue)" stroke-width="1.5"/>
+            <text x="450" y="265" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="var(--blue)" font-weight="600">§9</text>
+            <!-- X marks showing missing connections -->
+            <line x1="222" y1="58"  x2="292" y2="62"  stroke="rgba(200,30,30,0.18)" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <text x="257" y="54"  text-anchor="middle" font-family="Manrope,sans-serif" font-size="14" fill="rgba(200,30,30,0.45)" font-weight="700">✕</text>
+            <line x1="300" y1="148" x2="192" y2="148" stroke="rgba(200,30,30,0.18)" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <text x="246" y="144" text-anchor="middle" font-family="Manrope,sans-serif" font-size="14" fill="rgba(200,30,30,0.45)" font-weight="700">✕</text>
+            <line x1="300" y1="252" x2="175" y2="252" stroke="rgba(200,30,30,0.18)" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <text x="237" y="248" text-anchor="middle" font-family="Manrope,sans-serif" font-size="14" fill="rgba(200,30,30,0.45)" font-weight="700">✕</text>
+            <!-- Query arrow + similarity label -->
+            <line x1="55" y1="200" x2="160" y2="242" stroke="rgba(0,118,219,0.50)" stroke-width="2.5" stroke-dasharray="6 3"/>
+            <polygon points="158,234 166,248 152,248" fill="rgba(0,118,219,0.5)"/>
+            <rect x="10" y="182" width="90" height="36" rx="4" fill="rgba(0,118,219,0.10)" stroke="var(--blue)" stroke-width="2"/>
+            <text x="55" y="197" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="var(--blue)">🔍 query</text>
+            <text x="55" y="210" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(0,118,219,0.6)">cosine sim</text>
+            <!-- highlighted "hit" ring -->
+            <circle cx="155" cy="252" r="28" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-dasharray="5 3" opacity="0.6"/>
+            <text x="240" y="336" text-anchor="middle" font-family="Manrope,sans-serif" font-size="13" fill="var(--mute-on-cream)" font-style="italic">chunks aislados — sin contexto estructural</text>
+            <text x="240" y="356" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(200,30,30,0.5)">relaciones rotas entre §1…§9</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footbar on-cream">
+        <div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="partners"><span class="lbl">Framework</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE Luciano 07 — Nivel 06 Graph RAG ============ -->
+  <section class="bg-cream">
+    <div class="ring" style="width:460px;height:460px;right:-160px;top:-160px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>24 / 28 · Sesión Luciano</span>
+      </div>
+      <div class="luc-split">
+        <div class="luc-left">
+          <div class="luc-badge"><span class="n">06</span><span class="of7">/ 07</span></div>
+          <h2>Graph<br><em>RAG.</em></h2>
+          <div class="luc-concept"><p>El modelo <b>extrae entidades y mapea cómo se conectan</b>. Entiende relaciones, no solo keywords.</p></div>
+          <div class="luc-reto"><span class="tag">Valor</span><p>Si tu producto necesita RAG sí o sí, este es el <b>estándar</b>. Eficacia y precisión dan un salto enorme.</p></div>
+        </div>
+        <div class="luc-visual">
+          <svg viewBox="0 0 500 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- community cluster A outline -->
+            <ellipse cx="160" cy="110" rx="110" ry="70" fill="rgba(193,95,60,0.04)" stroke="rgba(193,95,60,0.18)" stroke-width="1.5" stroke-dasharray="6 4"/>
+            <text x="60" y="52" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(193,95,60,0.5)" letter-spacing="0.1em">community A</text>
+            <!-- community cluster B outline -->
+            <ellipse cx="360" cy="220" rx="110" ry="72" fill="rgba(58,13,140,0.04)" stroke="rgba(58,13,140,0.16)" stroke-width="1.5" stroke-dasharray="6 4"/>
+            <text x="320" y="300" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(58,13,140,0.4)" letter-spacing="0.1em">community B</text>
+            <!-- edges between entities -->
+            <line x1="160" y1="80"  x2="280" y2="78"  stroke="rgba(193,95,60,0.45)" stroke-width="2"/>
+            <text x="220" y="68" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(193,95,60,0.55)">trabaja_en</text>
+            <line x1="90"  y1="130" x2="160" y2="170" stroke="rgba(193,95,60,0.40)" stroke-width="2"/>
+            <text x="108" y="158" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(193,95,60,0.5)">parte_de</text>
+            <line x1="280" y1="78"  x2="380" y2="140" stroke="rgba(58,13,140,0.35)" stroke-width="2"/>
+            <text x="346" y="100" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(58,13,140,0.5)">publica</text>
+            <line x1="160" y1="170" x2="260" y2="210" stroke="rgba(193,95,60,0.35)" stroke-width="2"/>
+            <text x="198" y="205" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(193,95,60,0.5)">menciona</text>
+            <line x1="380" y1="140" x2="430" y2="220" stroke="rgba(58,13,140,0.30)" stroke-width="1.5"/>
+            <text x="418" y="185" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(58,13,140,0.45)">cita</text>
+            <line x1="260" y1="210" x2="380" y2="140" stroke="rgba(193,95,60,0.28)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <line x1="90"  y1="130" x2="70"  y2="220" stroke="rgba(193,95,60,0.25)" stroke-width="1.5"/>
+            <text x="60" y="184" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(193,95,60,0.45)">referencia</text>
+            <line x1="260" y1="210" x2="290" y2="300" stroke="rgba(58,13,140,0.25)" stroke-width="1.5"/>
+            <!-- entity nodes — person (orange), org (navy), concept (purple), doc (muted) -->
+            <circle cx="160" cy="80"  r="30" fill="rgba(193,95,60,0.12)" stroke="var(--terra)" stroke-width="2.5"/>
+            <text x="160" y="74" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10" fill="var(--terra)" font-weight="700">PERSONA</text>
+            <text x="160" y="87" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(193,95,60,0.7)">García</text>
+            <circle cx="280" cy="78"  r="28" fill="rgba(43,58,74,0.10)" stroke="var(--navy)" stroke-width="2.5"/>
+            <text x="280" y="72" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10" fill="var(--navy)" font-weight="700">ORG</text>
+            <text x="280" y="85" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(43,58,74,0.65)">Empresa X</text>
+            <circle cx="90"  cy="130" r="24" fill="rgba(193,95,60,0.09)" stroke="var(--terra)" stroke-width="2"/>
+            <text x="90"  y="126" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10" fill="var(--terra)" font-weight="600">CONCEPT</text>
+            <text x="90"  y="139" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(193,95,60,0.6)">seguridad</text>
+            <circle cx="380" cy="140" r="26" fill="rgba(58,13,140,0.10)" stroke="#6a35c2" stroke-width="2"/>
+            <text x="380" y="134" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10" fill="#6a35c2" font-weight="700">CONCEPT</text>
+            <text x="380" y="147" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(58,13,140,0.6)">RAG</text>
+            <circle cx="160" cy="170" r="22" fill="rgba(43,58,74,0.08)" stroke="var(--navy)" stroke-width="1.5"/>
+            <text x="160" y="166" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10" fill="var(--navy)" font-weight="600">DOC</text>
+            <text x="160" y="178" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(43,58,74,0.55)">informe</text>
+            <circle cx="430" cy="220" r="20" fill="rgba(58,13,140,0.08)" stroke="#6a35c2" stroke-width="1.5"/>
+            <text x="430" y="216" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10" fill="#6a35c2" font-weight="600">DOC</text>
+            <text x="430" y="228" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(58,13,140,0.55)">paper</text>
+            <circle cx="70"  cy="220" r="18" fill="rgba(193,95,60,0.07)" stroke="var(--terra)" stroke-width="1.5"/>
+            <text x="70"  y="225" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="var(--terra)">evento</text>
+            <circle cx="290" cy="300" r="18" fill="rgba(58,13,140,0.07)" stroke="#6a35c2" stroke-width="1.5"/>
+            <text x="290" y="305" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#6a35c2">tag</text>
+            <!-- Graph/LightRAG engine center -->
+            <circle cx="260" cy="210" r="38" fill="var(--terra)"/>
+            <text x="260" y="205" text-anchor="middle" font-family="Manrope,sans-serif" font-size="13" fill="#fff" font-weight="700">Graph</text>
+            <text x="260" y="221" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(255,255,255,0.82)">LightRAG</text>
+            <text x="250" y="390" text-anchor="middle" font-family="Manrope,sans-serif" font-size="13" fill="var(--mute-on-cream)" font-style="italic">entidades + relaciones + comunidades</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footbar on-cream">
+        <div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="partners"><span class="lbl">Framework</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE Luciano 08 — Nivel 07 Agentic & Multimodal RAG ============ -->
+  <section class="bg-navy">
+    <div class="frame">
+      <div class="topbar on-dark">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>25 / 28 · Sesión Luciano</span>
+      </div>
+      <div class="luc-split">
+        <div class="luc-left">
+          <div class="luc-badge"><span class="n" style="color:var(--orange)">07</span><span class="of7" style="color:rgba(255,255,255,0.4)">/ 07</span></div>
+          <h2 style="color:var(--cream);">Agentic &amp;<br><em>Multimodal RAG.</em></h2>
+          <div class="luc-concept" style="background:rgba(255,255,255,0.06);border-left:3px solid var(--orange);"><p style="color:var(--cream);">Un <b style="color:#fff">agente top-of-funnel</b> decide qué base consultar. Ingesta de video, imágenes, grafos y docs.</p></div>
+          <div class="luc-reto" style="background:rgba(255,112,51,0.10);border-left:3px solid var(--orange);"><span class="tag" style="color:var(--orange)">Valor</span><p style="color:rgba(255,255,255,0.68);">El valor real es la <b style="color:#fff">calidad de los datos</b> en segundo plano: limpiar, ingestar y sincronizar antes de que llegue a la IA.</p></div>
+        </div>
+        <div class="luc-visual">
+          <svg viewBox="0 0 500 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- USER QUERY input at top -->
+            <rect x="170" y="10" width="160" height="36" rx="5" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <text x="250" y="33" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" fill="rgba(255,255,255,0.75)" font-weight="600">USER QUERY</text>
+            <!-- arrow from query to orchestrator -->
+            <line x1="250" y1="46" x2="250" y2="82" stroke="rgba(255,112,51,0.7)" stroke-width="2"/>
+            <polygon points="243,80 257,80 250,94" fill="rgba(255,112,51,0.8)"/>
+            <!-- ORCHESTRATOR AGENT center -->
+            <circle cx="250" cy="140" r="48" fill="var(--orange)"/>
+            <text x="250" y="132" text-anchor="middle" font-family="Manrope,sans-serif" font-size="12" fill="#fff" font-weight="800">ORCHESTRATOR</text>
+            <text x="250" y="148" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(255,255,255,0.82)">agent</text>
+            <text x="250" y="163" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(255,255,255,0.6)">routes + plans</text>
+            <!-- sub-agent connectors -->
+            <line x1="204" y1="168" x2="108" y2="226" stroke="rgba(255,112,51,0.55)" stroke-width="2" stroke-dasharray="6 3"/>
+            <polygon points="102,220 114,228 104,236" fill="rgba(255,112,51,0.65)"/>
+            <line x1="250" y1="188" x2="250" y2="226" stroke="rgba(255,112,51,0.55)" stroke-width="2" stroke-dasharray="6 3"/>
+            <polygon points="243,224 257,224 250,238" fill="rgba(255,112,51,0.65)"/>
+            <line x1="296" y1="168" x2="392" y2="226" stroke="rgba(255,112,51,0.55)" stroke-width="2" stroke-dasharray="6 3"/>
+            <polygon points="396,220 384,228 394,236" fill="rgba(255,112,51,0.65)"/>
+            <!-- SUB-AGENTS row -->
+            <circle cx="108" cy="256" r="30" fill="rgba(255,112,51,0.15)" stroke="rgba(255,112,51,0.6)" stroke-width="2"/>
+            <text x="108" y="251" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(255,255,255,0.8)">retrieval</text>
+            <text x="108" y="265" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(255,255,255,0.55)">agent</text>
+            <circle cx="250" cy="256" r="30" fill="rgba(255,112,51,0.15)" stroke="rgba(255,112,51,0.6)" stroke-width="2"/>
+            <text x="250" y="251" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(255,255,255,0.8)">synthesis</text>
+            <text x="250" y="265" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(255,255,255,0.55)">agent</text>
+            <circle cx="392" cy="256" r="30" fill="rgba(255,112,51,0.15)" stroke="rgba(255,112,51,0.6)" stroke-width="2"/>
+            <text x="392" y="251" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(255,255,255,0.8)">ingest</text>
+            <text x="392" y="265" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(255,255,255,0.55)">agent</text>
+            <!-- sub-agent → data store connectors -->
+            <line x1="84"  y1="284" x2="52"  y2="336" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+            <line x1="108" y1="286" x2="108" y2="336" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+            <line x1="130" y1="284" x2="182" y2="336" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+            <line x1="368" y1="284" x2="308" y2="336" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <line x1="414" y1="284" x2="448" y2="336" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <!-- DATA STORES row -->
+            <rect x="10"  y="336" width="84" height="34" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,112,51,0.45)" stroke-width="1.5"/>
+            <text x="52"  y="357" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(255,255,255,0.7)">Vector DB</text>
+            <rect x="100" y="336" width="80" height="34" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,112,51,0.45)" stroke-width="1.5"/>
+            <text x="140" y="357" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(255,255,255,0.7)">Graph DB</text>
+            <rect x="186" y="336" width="88" height="34" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,112,51,0.35)" stroke-width="1.5"/>
+            <text x="230" y="357" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(255,255,255,0.65)">SQL / KG</text>
+            <rect x="280" y="336" width="82" height="34" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,112,51,0.35)" stroke-width="1.5"/>
+            <text x="321" y="357" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(255,255,255,0.65)">Docs / MD</text>
+            <rect x="368" y="336" width="90" height="34" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,112,51,0.30)" stroke-width="1.5"/>
+            <text x="413" y="357" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(255,255,255,0.6)">Video / Img</text>
+            <!-- feedback loop arrow from synthesis back to orchestrator -->
+            <path d="M 280 256 Q 460 200 300 140" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <polygon points="296,134 306,140 298,150" fill="rgba(255,255,255,0.2)"/>
+            <text x="430" y="200" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(255,255,255,0.35)">feedback</text>
+            <!-- label -->
+            <text x="250" y="415" text-anchor="middle" font-family="Manrope,sans-serif" font-size="13" fill="rgba(255,255,255,0.4)" font-style="italic">orquestación multi-agente · fuentes heterogéneas</text>
+          </svg>
+        </div>
+      </div>
+      <div class="footbar on-dark">
+        <div class="host"><img src="assets/logo-aicollective-white.png" alt="The AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="partners"><span class="lbl">Framework</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE Luciano 09 — Cierre ============ -->
+  <section class="bg-navy">
+    <div class="frame">
+      <div class="topbar on-dark">
+        <span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span>
+        <span>26 / 28 · Sesión Luciano</span>
+      </div>
+      <div class="luc-close">
+        <span style="font-family:var(--mono);font-size:20px;letter-spacing:0.22em;text-transform:uppercase;color:var(--orange);font-weight:700;">Takeaway final</span>
+        <h2>Escalá al siguiente nivel<br>solo cuando el <em>producto</em><br>y el usuario te lo pidan.</h2>
+        <p class="quote">Un sistema <b>local y simple, bien estructurado</b>, es muchísimo más poderoso que un RAG gigante que nadie puede mantener. Iteren rápido, aporten valor y <b>construyan con pragmatismo.</b></p>
+      </div>
+      <div class="footbar on-dark">
+        <div class="host"><img src="assets/logo-aicollective-white.png" alt="The AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="partners"><span class="lbl">Framework</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 18 — Galo divider ============ -->
+  <section class="bg-cream">
+    <div class="blob" style="width:640px;height:640px;right:-240px;top:-200px;"></div>
+    <div class="ring" style="width:420px;height:420px;left:-160px;bottom:-180px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>27 / 28 · Partner del desafío</span></div>
+      <div class="galo-brand-card">
+        <span class="galo-question">¿Qué es?</span>
+        <img class="galo-mark" src="assets/logo-galo.png" alt="Galo">
+        <div class="galo-presenter">
+          <span class="presenter-tag">Lo presenta</span>
+          <span class="presenter-name">Franco <em>Pesce</em></span>
+          <span class="presenter-role">CTO · Galo</span>
+        </div>
+      </div>
+      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Challenge</span><img class="galo" src="assets/logo-galo.png" alt="Galo"></div></div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 19 — Bases ============ -->
+  <section class="bg-cream" data-deck-last-visible="">
+    <div class="ring" style="width:720px;height:720px;right:-260px;bottom:-260px;"></div>
+    <div class="blob" style="width:320px;height:320px;left:-120px;top:-100px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>28 / 28 · El desafío</span></div>
+
+      <div class="challenge-wrap">
+        <div class="challenge-head">
+          <div class="head-left">
+            <span class="pill" style="border:1px solid var(--ink);color:var(--ink);">
+              <span class="sq" style="background:var(--terra);"></span>Challenge · 3 ejes de evaluación
+            </span>
+            <h2>El <em>desafío</em>.</h2>
+          </div>
+          <p class="lede">Aplicá lo trabajado durante el workshop a un caso real propuesto por <b>Galo</b>. Lo que se evalúa es simple: que la propuesta <b>sirva</b>, <b>sorprenda</b> y <b>aguante crecimiento</b>.</p>
+        </div>
+        <div class="challenge-criteria">
+          <div class="col">
+            <span class="num">01</span>
+            <h4><em>Realismo</em></h4>
+            <p class="q">¿Funciona en el mundo real?</p>
+            <p class="desc">Restricciones, fricciones y costos — nada de slides bonitas. <b>Soluciones que sobreviven al primer usuario.</b></p>
+          </div>
+          <div class="col">
+            <span class="num">02</span>
+            <h4><em>Innovación</em></h4>
+            <p class="q">¿Hay un ángulo nuevo?</p>
+            <p class="desc">Algo no obvio, una vuelta que <b>sólo se podía dar con las herramientas de hoy</b>.</p>
+          </div>
+          <div class="col">
+            <span class="num">03</span>
+            <h4><em>Escalabilidad</em></h4>
+            <p class="q">¿Puede crecer?</p>
+            <p class="desc">Cuántos usuarios soporta, qué tan repetible es el proceso, <b>qué cuesta sumar al siguiente</b>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footbar on-cream">
+        <div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div>
+        <div class="partners"><span class="lbl">Challenge</span><img class="galo" src="assets/logo-galo.png" alt="Galo"><span class="sep"></span><img class="anth-icon" src="assets/icon-anthropic.png" alt="Anthropic"></div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+
+
+</body></html>
