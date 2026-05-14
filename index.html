@@ -98,8 +98,8 @@ deck-stage section{overflow:hidden;position:relative;font-family:var(--sans);}
   width:52px;height:52px;border-radius:50%;
   background:rgba(255,255,255,0.95);flex-shrink:0;
   box-shadow:0 4px 14px rgba(0,0,0,0.18);}
-.footbar.on-cream .host .xpl-chip{background:transparent;box-shadow:none;}
-.footbar.on-cream .host .xpl-chip img{mix-blend-mode:multiply;}
+.footbar.on-cream .host .xpl-chip{background:radial-gradient(circle at 40% 35%, #5a1fa8 0%, #2d0d75 45%, #0a0420 100%);box-shadow:0 4px 14px rgba(0,0,0,0.28);}
+.footbar.on-cream .host .xpl-chip img{filter:brightness(0) invert(1);}
 .footbar .host .xpl-chip img{width:auto;height:34px;display:block;}
 .footbar .host .plus{font-family:var(--display);font-style:italic;font-size:26px;line-height:1;color:var(--orange);font-weight:400;opacity:0.9;}
 .footbar.on-dark .host .plus{color:var(--orange);}
@@ -147,7 +147,7 @@ deck-stage section{overflow:hidden;position:relative;font-family:var(--sans);}
   font-family:var(--mono);font-size:14px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(255,255,255,0.42);
   display:flex;align-items:center;gap:14px;z-index:3;}
 .hero-mono-stamp::before{content:"";width:48px;height:1px;background:rgba(255,255,255,0.32);}
-.hero{display:grid;grid-template-rows:auto 1fr auto auto;gap:0;height:100%;position:relative;z-index:2;}
+.hero{display:grid;grid-template-rows:auto 1fr auto auto;gap:0;flex:1;position:relative;z-index:2;}
 .hero-brand{display:flex;align-items:center;gap:30px;
   padding-bottom:24px;border-bottom:1px solid var(--rule-on-dark);}
 .hero-brand img.aic{height:72px;width:auto;display:block;}
@@ -187,7 +187,7 @@ deck-stage section{overflow:hidden;position:relative;font-family:var(--sans);}
 .hero-meta-row .val em{color:var(--orange);font-style:italic;}
 
 /* ============ SLIDE 02 — AI Collective duotone ============ */
-.aic-wrap{height:100%;display:flex;flex-direction:column;}
+.aic-wrap{flex:1;display:flex;flex-direction:column;}
 .aic-head{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;color:#fff;
   font-family:var(--mono);font-size:22px;letter-spacing:0.18em;text-transform:uppercase;}
 .aic-head .mark{display:inline-flex;align-items:center;gap:12px;font-weight:700;}
