@@ -471,6 +471,38 @@ deck-stage section{overflow:hidden;position:relative;font-family:var(--sans);}
 .footbar.on-dark .partners img.anth,
 .footbar.on-dark .partners img.personal-logo{filter:brightness(0) invert(1);opacity:0.92;}
 
+/* ============ JIMMY — Editorial Cards ============ */
+.jim-page{flex:1;display:grid;grid-template-columns:0.78fr 1.22fr;gap:54px;align-items:start;padding-top:14px;}
+.jim-left{display:flex;flex-direction:column;gap:22px;position:relative;}
+.jim-num{font-family:var(--display);font-style:italic;font-size:280px;line-height:0.78;color:var(--terra);letter-spacing:-0.05em;margin:-26px 0 -22px;display:flex;align-items:flex-start;gap:10px;}
+.jim-num .of{font-family:var(--mono);font-style:normal;font-size:26px;color:var(--mute-on-cream);letter-spacing:0.18em;padding-top:36px;font-weight:600;}
+.jim-eyebrow{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:18px;color:var(--navy);letter-spacing:0.18em;text-transform:uppercase;font-weight:700;}
+.jim-eyebrow .sq{width:12px;height:12px;background:var(--terra);}
+.jim-eyebrow .meta{color:var(--mute-on-cream);font-weight:500;}
+.jim-h{margin:0;font-family:var(--display);font-weight:400;font-size:84px;line-height:0.95;color:var(--ink);letter-spacing:-0.02em;}
+.jim-h em{color:var(--terra);font-style:italic;}
+.jim-kicker{font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.4;color:var(--mute-on-cream);max-width:440px;margin:6px 0 0;}
+.jim-kicker b{color:var(--navy);font-style:normal;font-weight:600;}
+.jim-right{display:flex;flex-direction:column;gap:18px;padding-top:6px;}
+.jim-lead{padding:34px 38px;background:var(--navy);color:var(--cream);position:relative;}
+.jim-lead::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,var(--orange) 0%,var(--terra) 100%);}
+.jim-lead .tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:14px;letter-spacing:0.24em;text-transform:uppercase;color:var(--orange);font-weight:700;}
+.jim-lead .tag::before{content:"";width:8px;height:8px;background:var(--orange);}
+.jim-lead h4{margin:14px 0 0;font-family:var(--display);font-weight:400;font-size:46px;line-height:1.0;color:var(--cream);letter-spacing:-0.01em;}
+.jim-lead h4 em{color:var(--orange);font-style:italic;}
+.jim-lead .body{margin:16px 0 0;font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.4;color:rgba(244,243,238,0.78);}
+.jim-lead .body b{font-style:normal;color:#fff;font-weight:600;}
+.jim-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.jim-card{padding:22px 26px;background:rgba(193,95,60,0.05);border-top:3px solid var(--terra);display:flex;flex-direction:column;gap:10px;}
+.jim-card.alt{background:rgba(43,58,74,0.06);border-top-color:var(--navy);}
+.jim-card .tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:0.22em;text-transform:uppercase;color:var(--terra);font-weight:700;}
+.jim-card.alt .tag{color:var(--navy);}
+.jim-card .tag::before{content:"";width:8px;height:8px;background:var(--terra);}
+.jim-card.alt .tag::before{background:var(--navy);}
+.jim-card p{margin:0;font-family:var(--sans);font-size:21px;line-height:1.42;color:var(--ink);}
+.jim-card p b{font-weight:700;color:var(--terra);}
+.jim-card.alt p b{color:var(--navy);}
+
 /* ============ LUCIANO — 7 Niveles de Memoria ============ */
 .luc-split{flex:1;display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center;}
 .luc-left{display:flex;flex-direction:column;gap:22px;}
@@ -1019,49 +1051,143 @@ deck-stage section{overflow:hidden;position:relative;font-family:var(--sans);}
     </div>
   </section>
 
-  <!-- ============ SLIDES 10–14 Jimmy 02–06 ============ -->
+  <!-- ============ SLIDES 11–15 Jimmy · Second Brain (PDF) ============ -->
   <section class="bg-cream">
     <div class="ring" style="width:420px;height:420px;right:-140px;top:-120px;"></div>
     <div class="frame">
       <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>11 / 28 · Sesión Jimmy</span></div>
-      <div class="content-placeholder"><span class="ph-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span><h2>Título del <em>tema</em><br>02 de 06.</h2><div class="slot"><div class="block lead"><span class="tag">Idea principal</span><h4>Concepto <em>central</em><br>del bloque.</h4><p>Bloque dominante: titular del tema, demo o visualización clave.</p></div><div class="block"><span class="tag">Detalle / Demo</span><p>Captura, esquema o fragmento que sostiene la idea.</p></div><div class="block"><span class="tag">Takeaway</span><p>La frase que el público se lleva al final.</p></div></div></div>
-      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
-    </div>
-  </section>
-  <section class="bg-cream">
-    <div class="blob" style="width:320px;height:320px;left:-100px;bottom:-120px;"></div>
-    <div class="frame">
-      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>12 / 28 · Sesión Jimmy</span></div>
-      <div class="content-placeholder"><span class="ph-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span><h2>Título del <em>tema</em><br>03 de 06.</h2><div class="slot"><div class="block lead"><span class="tag">Idea principal</span><h4>Concepto <em>central</em><br>del bloque.</h4><p>Bloque dominante: titular del tema, demo o visualización clave.</p></div><div class="block"><span class="tag">Detalle / Demo</span><p>Captura, esquema o fragmento que sostiene la idea.</p></div><div class="block"><span class="tag">Takeaway</span><p>La frase que el público se lleva al final.</p></div></div></div>
-      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
-    </div>
-  </section>
-  <section class="bg-cream">
-    <div class="ring" style="width:600px;height:600px;right:-200px;bottom:-240px;"></div>
-    <div class="frame">
-      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>13 / 28 · Sesión Jimmy</span></div>
-      <div class="content-placeholder"><span class="ph-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span><h2>Título del <em>tema</em><br>04 de 06.</h2><div class="slot"><div class="block lead"><span class="tag">Idea principal</span><h4>Concepto <em>central</em><br>del bloque.</h4><p>Bloque dominante: titular del tema, demo o visualización clave.</p></div><div class="block"><span class="tag">Detalle / Demo</span><p>Captura, esquema o fragmento que sostiene la idea.</p></div><div class="block"><span class="tag">Takeaway</span><p>La frase que el público se lleva al final.</p></div></div></div>
-      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
-    </div>
-  </section>
-  <section class="bg-cream">
-    <div class="blob" style="width:480px;height:480px;right:-160px;top:-160px;"></div>
-    <div class="frame">
-      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>14 / 28 · Sesión Jimmy</span></div>
-      <div class="content-placeholder"><span class="ph-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span><h2>Título del <em>tema</em><br>05 de 06.</h2><div class="slot"><div class="block lead"><span class="tag">Idea principal</span><h4>Concepto <em>central</em><br>del bloque.</h4><p>Bloque dominante: titular del tema, demo o visualización clave.</p></div><div class="block"><span class="tag">Detalle / Demo</span><p>Captura, esquema o fragmento que sostiene la idea.</p></div><div class="block"><span class="tag">Takeaway</span><p>La frase que el público se lleva al final.</p></div></div></div>
-      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
-    </div>
-  </section>
-  <section class="bg-cream">
-    <div class="ring" style="width:380px;height:380px;left:-130px;top:-120px;"></div>
-    <div class="frame">
-      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>15 / 28 · Sesión Jimmy</span></div>
-      <div class="content-placeholder"><span class="ph-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span><h2>Título del <em>tema</em><br>06 de 06.</h2><div class="slot"><div class="block lead"><span class="tag">Idea principal</span><h4>Concepto <em>central</em><br>del bloque.</h4><p>Bloque dominante: titular del tema, demo o visualización clave.</p></div><div class="block"><span class="tag">Detalle / Demo</span><p>Captura, esquema o fragmento que sostiene la idea.</p></div><div class="block"><span class="tag">Takeaway</span><p>La frase que el público se lleva al final.</p></div></div></div>
+      <div class="jim-page">
+        <div class="jim-left">
+          <div class="jim-num">01<span class="of">/ 05</span></div>
+          <span class="jim-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span>
+          <h2 class="jim-h">¿Qué es un<br><em>second brain</em>?</h2>
+          <p class="jim-kicker">Un setup que <b>ya conoce quién sos</b>, en qué trabajás y todo lo que capturaste — antes de que escribas una sola palabra.</p>
+        </div>
+        <div class="jim-right">
+          <div class="jim-lead">
+            <span class="tag">La promesa</span>
+            <h4>No es un <em>chatbot</em>.<br>Es un asistente que nunca <em>olvida</em>.</h4>
+            <p class="body">Nunca duerme, nunca olvida, <b>mejora cada día</b>. Cada mañana, antes de que abras el editor, Claude ya tiene tu contexto cargado.</p>
+          </div>
+          <div class="jim-row">
+            <div class="jim-card"><span class="tag">Cada mañana sabe</span><p><b>Quién sos</b> · perfil, tools, contexto.<br><b>Qué construís</b> · proyectos, tareas, metas.<br><b>Todo lo capturado</b> · ideas, notas, highlights.</p></div>
+            <div class="jim-card alt"><span class="tag">Por qué importa</span><p>Dejás de empezar cada conversación <b>desde cero</b>. El contexto deja de ser tu problema.</p></div>
+          </div>
+        </div>
+      </div>
       <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
     </div>
   </section>
 
-  <!-- ============ SLIDE 15 — Luciano divider ============ -->
+  <section class="bg-cream">
+    <div class="blob" style="width:320px;height:320px;left:-100px;bottom:-120px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>12 / 28 · Sesión Jimmy</span></div>
+      <div class="jim-page">
+        <div class="jim-left">
+          <div class="jim-num">02<span class="of">/ 05</span></div>
+          <span class="jim-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span>
+          <h2 class="jim-h">De cero a online<br>en <em>horas</em>.</h2>
+          <p class="jim-kicker">Cuatro pasos, no más. El primer commit del segundo cerebro <b>cabe en una tarde</b>.</p>
+        </div>
+        <div class="jim-right">
+          <div class="jim-lead">
+            <span class="tag">Los 4 pasos</span>
+            <h4><em>Descargar</em> → <em>Instalar</em> →<br><em>Apuntar</em> → <em>Aplicar prompt</em>.</h4>
+            <p class="body"><b>1.</b> Descargar el vault &nbsp;·&nbsp; <b>2.</b> Instalar Claude Code &nbsp;·&nbsp; <b>3.</b> Apuntarlo al vault &nbsp;·&nbsp; <b>4.</b> Aplicar el prompt maestro.</p>
+          </div>
+          <div class="jim-row">
+            <div class="jim-card"><span class="tag">¿Sin material?</span><p>Abrí Claude Chat, hablá <b>20 minutos</b> sobre tu trabajo y metas, guardá esa charla como tu <b>memoria inicial</b>.</p></div>
+            <div class="jim-card alt"><span class="tag">Insight</span><p>El vault <b>no necesita estar completo</b> para ser útil. Empezá chico, crece solo.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
+    </div>
+  </section>
+
+  <section class="bg-cream">
+    <div class="ring" style="width:600px;height:600px;right:-200px;bottom:-240px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>13 / 28 · Sesión Jimmy</span></div>
+      <div class="jim-page">
+        <div class="jim-left">
+          <div class="jim-num">03<span class="of">/ 05</span></div>
+          <span class="jim-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span>
+          <h2 class="jim-h">¿Qué va<br>en tu <em>vault</em>?</h2>
+          <p class="jim-kicker">Todo lo que <b>consumiste este año</b> y simplemente desapareció — más todo lo que producís cada día.</p>
+        </div>
+        <div class="jim-right">
+          <div class="jim-lead">
+            <span class="tag">El material crudo</span>
+            <h4>Lo que <em>terminaste</em> y olvidaste.<br>Lo que <em>guardaste</em> y nunca reabriste.</h4>
+            <p class="body">El conocimiento no se pierde porque sea malo — se pierde porque <b>nunca lo volviste a abrir</b>.</p>
+          </div>
+          <div class="jim-row">
+            <div class="jim-card"><span class="tag">Consumo</span><p><b>Libros y podcasts</b> que terminaste y olvidaste. <b>Artículos y highlights</b> guardados a las 11pm.</p></div>
+            <div class="jim-card alt"><span class="tag">Trabajo</span><p><b>Notas de proyectos</b>, decisiones, transcripciones de llamadas, lecciones aprendidas.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
+    </div>
+  </section>
+
+  <section class="bg-cream">
+    <div class="blob" style="width:480px;height:480px;right:-160px;top:-160px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>14 / 28 · Sesión Jimmy</span></div>
+      <div class="jim-page">
+        <div class="jim-left">
+          <div class="jim-num">04<span class="of">/ 05</span></div>
+          <span class="jim-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span>
+          <h2 class="jim-h">El loop del<br><em>día a día</em>.</h2>
+          <p class="jim-kicker">Tres acciones encadenadas y un mantenimiento automático — el conocimiento <b>se acumula solo</b>.</p>
+        </div>
+        <div class="jim-right">
+          <div class="jim-lead">
+            <span class="tag">Ingerir → Consultar → Guardar</span>
+            <h4>Clip un artículo. <em>Pregúntale</em> al wiki.<br>Guardá la respuesta.</h4>
+            <p class="body"><b>Ingerir:</b> con Web Clipper, Claude vincula el material con 10–15 páginas del wiki y <b>detecta conexiones y contradicciones</b>.</p>
+          </div>
+          <div class="jim-row">
+            <div class="jim-card"><span class="tag">Consultar</span><p>Preguntás al wiki · Claude escanea el índice, extrae las páginas y responde <b>con citas</b>.</p></div>
+            <div class="jim-card alt"><span class="tag">Lint semanal</span><p>Un comando mantiene la base saludable. El <b>mantenimiento deja de ser tu trabajo</b>.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
+    </div>
+  </section>
+
+  <section class="bg-cream">
+    <div class="ring" style="width:380px;height:380px;left:-130px;top:-120px;"></div>
+    <div class="frame">
+      <div class="topbar on-cream"><span class="mark"><span class="dot"></span>&nbsp;Workshop · Claude + Obsidian</span><span>15 / 28 · Sesión Jimmy</span></div>
+      <div class="jim-page">
+        <div class="jim-left">
+          <div class="jim-num">05<span class="of">/ 05</span></div>
+          <span class="jim-eyebrow"><span class="sq"></span>Sesión 02 · Workshop principal <span class="meta">— Jimmy Adaro</span></span>
+          <h2 class="jim-h">Construilo una vez.<br>Usalo <em>para siempre</em>.</h2>
+          <p class="jim-kicker">Vannevar Bush soñó el <b>Memex en 1945</b>. El problema que no pudo resolver: <b>¿quién hace el mantenimiento?</b> Ahora ya lo sabés.</p>
+        </div>
+        <div class="jim-right">
+          <div class="jim-lead">
+            <span class="tag">El reparto</span>
+            <h4><em>Humano:</em> curar, preguntar, pensar.<br><em>Claude:</em> resumir, cruzar, mantener.</h4>
+            <p class="body">El trabajo del humano es <b>el significado</b>. El trabajo de Claude es el <b>sistema</b> que sostiene ese significado en el tiempo.</p>
+          </div>
+          <div class="jim-row">
+            <div class="jim-card"><span class="tag">Por qué casi nadie lo tiene</span><p>El ciclo: empezás organizado, el <b>mantenimiento se acumula</b>, lo abandonás, el sistema se degrada. Claude rompe el ciclo.</p></div>
+            <div class="jim-card alt"><span class="tag">Insight final</span><p>Reorganizar todo el vault es <b>un prompt</b>. Migrar desde Notion es <b>un comando</b>. El costo de cambio se vuelve cero.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footbar on-cream"><div class="host"><img src="assets/logo-aicollective-full.png" alt="AI Collective"><span class="plus">×</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span><span class="lbl">Xplora</span></div><div class="partners"><span class="lbl">Workshop · Lideki</span></div></div>
+    </div>
+  </section>
+
+    <!-- ============ SLIDE 15 — Luciano divider ============ -->
   <section class="bg-cream">
     <div class="blob" style="width:540px;height:540px;right:-180px;top:-160px;"></div>
     <div class="ring" style="width:320px;height:320px;left:-100px;bottom:-100px;"></div>
@@ -1112,7 +1238,7 @@ deck-stage section{overflow:hidden;position:relative;font-family:var(--sans);}
         <span style="font-family:var(--mono);font-size:17px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.22);">¿hasta cuál llegaste?</span>
       </div>
       <div class="footbar on-dark">
-        <div class="host"><img src="assets/logo-aicollective-white.webp" alt="The AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="host"><img src="assets/logo-aicollective-white.png" alt="The AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
         <div class="partners"><span class="lbl">Framework</span></div>
       </div>
     </div>
@@ -1150,7 +1276,7 @@ deck-stage section{overflow:hidden;position:relative;font-family:var(--sans);}
         </div>
       </div>
       <div class="footbar on-dark">
-        <div class="host"><img src="assets/logo-aicollective-white.webp" alt="The AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="host"><img src="assets/logo-aicollective-white.png" alt="The AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
         <div class="partners"><span class="lbl">Framework</span></div>
       </div>
     </div>
@@ -1626,7 +1752,7 @@ deck-stage section{overflow:hidden;position:relative;font-family:var(--sans);}
         </div>
       </div>
       <div class="footbar on-dark">
-        <div class="host"><img src="assets/logo-aicollective-white.webp" alt="The AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="host"><img src="assets/logo-aicollective-white.png" alt="The AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
         <div class="partners"><span class="lbl">Framework</span></div>
       </div>
     </div>
@@ -1645,7 +1771,7 @@ deck-stage section{overflow:hidden;position:relative;font-family:var(--sans);}
         <p class="quote">Un sistema <b>local y simple, bien estructurado</b>, es muchísimo más poderoso que un RAG gigante que nadie puede mantener. Iteren rápido, aporten valor y <b>construyan con pragmatismo.</b></p>
       </div>
       <div class="footbar on-dark">
-        <div class="host"><img src="assets/logo-aicollective-white.webp" alt="The AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
+        <div class="host"><img src="assets/logo-aicollective-white.png" alt="The AI Collective"><span class="plus">+</span><span class="xpl-chip"><img src="assets/logo-xplora.png" alt="Xplora · UCEMA"></span></div>
         <div class="partners"><span class="lbl">Framework</span></div>
       </div>
     </div>

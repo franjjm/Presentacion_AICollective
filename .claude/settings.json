@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(git rm *)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\franj\\.claude\\projects\\c--Users-franj-Downloads-Claude---Obsidian\\memory"
+    ]
+  }
+}

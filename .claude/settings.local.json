@@ -9,7 +9,10 @@
       "Bash(python -c \"from PIL import Image; print\\('Pillow OK'\\)\")",
       "Bash(pip install *)",
       "Bash(python -c ' *)",
-      "Bash(start \"c:\\\\Users\\\\franj\\\\Downloads\\\\Claude + Obsidian\\\\index.html\")"
+      "Bash(start \"c:\\\\Users\\\\franj\\\\Downloads\\\\Claude + Obsidian\\\\index.html\")",
+      "Bash(git pull *)",
+      "Bash(ls \"c:\\\\Users\\\\franj\\\\Downloads\" | head -20)",
+      "Read(//c/Users/franj/Downloads/**)"
     ]
   }
 }
